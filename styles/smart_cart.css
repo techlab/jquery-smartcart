@@ -1,0 +1,533 @@
+/*   
+  SmartCart 2.0 plugin 
+  jQuery Shopping Cart Plugin
+  by Dipu
+  
+  http://www.techlaboratory.net
+  http://tech-laboratory.blogspot.com
+*/
+
+.scMain {
+    position:relative;
+    margin:0;
+    padding:0;  
+    font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
+    color: #5A5655;
+    border: 0px solid #CCC;
+    width:700px; 
+}
+.scMain .scTabs{
+    position:relative;
+    margin:0;
+    padding:0; 
+    top:0px;   
+    color: #5A5655;
+    background-color: transparent;
+    border: 1px solid #CCC; 
+    border-top: 0px solid transparent; 
+    border-bottom: 0px solid transparent;
+    height:300px; 
+}
+.scMain .scBottomBar {
+    display:block;    
+    position: relative;    
+    padding: 3px;  
+    margin: 0; 
+    margin-top: 0px;    
+    width:692px;
+    height:40px; 
+    border: 1px solid #AAAAAA;  
+    border-bottom: 1px solid #AAAAAA;   
+    background: #F5F5F5 url(../images/top_bg.gif);      
+}
+/* Cart Styles */
+.scMain .scCartHeader {
+    display:block;    
+    position: relative;    
+    padding: 0px;  
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 0;   
+    width:698px;
+    height:23px; 
+    border: 0;  
+    border-bottom: 1px solid #CCC;  
+    background: #F5F5F5;   
+}
+.scMain .scCartHeader .scCartTitle {
+    display:block;    
+    position: relative;    
+    padding: 0px;
+    padding-top: 4px; 
+    padding-left: 5px;      
+    margin: 0;
+    height:18px; 
+    border: 0;  
+    border-right: 1px solid #CCC;   
+    float:left;
+}
+.scMain .scCartHeader .scCartTitle1 { 
+    width:290px; 
+}
+.scMain .scCartHeader .scCartTitle2 { 
+    width:100px; 
+}
+.scMain .scCartHeader .scCartTitle3 { 
+    width:70px; 
+}
+.scMain .scCartHeader .scCartTitle4 { 
+    width:100px; 
+}
+.scMain .scCartHeader .scCartTitle5 { 
+    width:100px; 
+    border-right: 0;    
+}
+.scMain .scCartList {
+    display:block;    
+    position: relative;    
+    padding: 0px;  
+    margin: 0;   
+    width:100%;
+    height:264px; 
+    border: 0px solid #F5F5F5;   
+    background: #FFFFFF; 
+    overflow:auto;  
+}
+.scMain .scCartList .scCartItem {
+    display:block;    
+    position: relative;    
+    padding: 0px;  
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 0;
+    margin-top: 3px;   
+    width:100%;  /* 898px */
+ 
+    border: 0;  
+    border-bottom: 1px solid #CCC;  
+    background: #F5F5F5; 
+    float:left;  
+}
+.scMain .scCartList .scCartItem .scCartItemTitle {
+    display:block;    
+    position: relative;    
+    padding: 0px;
+    padding-top: 5px; 
+    padding-left: 5px;      
+    margin: 0;
+ 
+    border: 0;  
+    border-right: 1px solid #CCC;   
+    float:left;
+}
+.scMain .scCartList .scCartItem .scCartItemTitle1 {
+    padding-top: 2px;    
+    width:290px;     
+}
+.scMain .scCartList .scCartItem .scCartItemTitle1 div, .scMain .scCartList .scCartItem .scCartItemTitle1 img { 
+    margin-left: 3px;
+    float:left;     
+}
+.scMain .scCartList .scCartItem .scCartItemTitle1 div{
+    display:block;
+    overflow: hidden;
+    width:245px;
+            
+}
+.scMain .scCartList .scCartItem .scCartItemTitle2 { 
+    width:100px; 
+    height:28px;
+}
+.scMain .scCartList .scCartItem .scCartItemTitle3 { 
+    width:70px;
+    height:28px; 
+}
+.scMain .scCartList .scCartItem .scCartItemTitle4 { 
+    width:100px;
+    height:28px; 
+}
+.scMain .scCartList .scCartItem .scCartItemTitle5 {  
+    border-right: 0;  
+}
+
+/* Product List Styles */
+.scMain .scSearchPanel {
+    display:block;    
+    position: relative;    
+    padding: 2px;  
+    margin: 0;   
+    width:692px;
+    height:23px; 
+    border: 1px solid #F5F5F5;  
+    border-bottom: 1px solid #CCC;  
+    background: #F5F5F5;   
+}
+.scMain .scSearchPanel .scTxtSearch {  
+    display:block;  
+    position: relative;    
+    padding: 2px;  
+    margin: 0;   
+    height:18px;  
+    line-height:18px; 
+    margin-left:1px;
+    border:1px solid #AAAAAA;
+    padding:1px 5px;
+    width:150px;  
+    color:#5A5655;
+    float:left; 
+}
+.scMain .scSearchPanel .scLabelSearch { 
+    display:block;   
+    position: relative;    
+    padding: 2px;  
+    margin: 0;   
+    height:18px;  
+    line-height:18px; 
+    margin-left:1px; 
+    color:#5A5655; 
+    float:left;    
+}
+.scMain .scSearchPanel .scLabelCategory { 
+    display:block;   
+    position: relative;    
+    padding: 2px;  
+    margin: 0;   
+    height:18px;  
+    line-height:18px; 
+    margin-left:10px; 
+    color:#5A5655; 
+    float:left;    
+}
+.scMain .scSearchPanel .scSelCategory {  
+    display:block;  
+    position: relative;    
+    padding: 1px;  
+    margin: 0;      
+    margin-left:1px;
+    border:1px solid #AAAAAA;
+    padding:1px;  
+    color:#5A5655;
+    float:left; 
+}
+.scMain .scProductList {
+    display:block;    
+    position: relative;    
+    padding: 3px;  
+    margin: 0;   
+    width:690px;
+    height:264px; 
+    border: 0px solid #F5F5F5;   
+    background: #FFFFFF; 
+    overflow:auto;  
+}
+.scMain .scProductList .scProducts {
+    display:block;    
+    position: relative;    
+    padding: 0px;  
+    margin: 0;   
+    margin-top: 3px;
+    width:100%; 
+    border: 1px solid #F5F5F5;  
+    border-bottom: 1px solid #CCC;  
+    background: #F5F5F5;  
+    overflow:visible; 
+    float:left;    
+}
+.scMain .scProductList .scProducts:hover {
+    border: 1px solid #CCC;
+}
+.scMain .scProductList .scProducts .scPDiv1 {
+    margin-left:0px;
+    padding:2px;
+    float:left;
+}
+.scMain .scProductList .scProducts .scPDiv2 {  
+    margin-left:3px;
+    margin-bottom:3px;    
+    float:left;  
+    width:400px; 
+    padding:2px;        
+}
+.scMain .scProductList .scProducts .scPDiv3 {
+    margin-right:10px;
+    float:right;
+    width:200px;   
+}
+
+.scMain ul.scMenuBar {
+  display:block;
+  list-style: none;    
+  position: relative;    
+  padding: 0px;       
+  margin: 0;     
+  height:33px; 
+  clear: both;
+  border: 1px solid #AAAAAA;  
+  border-bottom: 1px solid #AAAAAA;  
+  background: #F5F5F5 url(../images/top_bg.gif);   
+}
+.scMain ul.scMenuBar li{ 
+  position: relative; 
+  margin: 0;
+  padding: 0;
+  padding-right: 2px; 
+  border-bottom: 0px; 
+  border-right: 0px;  
+  border-left: 0px;      
+  float: left;
+}
+.scMain ul.scMenuBar li a { 
+  position:relative;
+  display:block;
+  margin:0;
+  margin-left:5px;
+  margin-top:2px;
+  padding:0;
+  padding-top:4px;
+  text-decoration: none;
+  height:25px;
+  width:180px;
+  color:#727272;  /* 0464BB */
+  font: normal 13px Verdana, Arial, Helvetica, sans-serif;
+  outline-style:none;
+  text-align:center;
+  background-color:   #FCFCFC;
+  border: 1px solid #AAAAAA;  
+  border-bottom: 1px solid #FCFCFC;        
+}
+.scMain ul.scMenuBar li a:hover { 
+  color:#5A5655;  
+  background: #F2F2F2; 
+  border-bottom: 1px solid #F2F2F2; 
+}
+.scMain ul.scMenuBar li a.sel {   
+  color:#5A5655;  
+  background: #F5F5F5;  
+  cursor:text;
+  font-weight:bold;
+  border-bottom: 1px solid #F5F5F5; 
+  height:26px;
+  bottom:-1px;   
+}
+
+.scProductImage{
+  position:relative;
+  width:45px;
+  overflow:hidden;
+  float:left;
+  padding: 0;
+  margin:1px 1px 1px 1px;
+  background:transparent;
+  border:1px solid #AAA;           
+}
+.scProductImageSmall{
+  width:28px;
+  height:28px;
+  overflow:hidden;
+  float:left;
+  padding: 0;
+  margin:0;
+  background:transparent;
+  border:1px solid #AAA;           
+}
+.sImgLoader{
+  position:absolute;
+  margin:0;
+  padding: 0;
+  margin-left:25px;
+  margin-top:10px;    
+  background-color: #FFF;
+}
+.scSearch { 
+  display:block;  
+  margin:0;
+  margin-top:0px;
+  margin-left:5px;    
+  padding:0;
+  padding-top:3px;
+  text-decoration: none;
+  height:17px;
+  width:80px;
+  color:#5A5655;  /* 0464BB */
+  font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+  outline-style:none;
+  text-align:center;
+  background-color:   #FCFCFC;
+  border: 1px solid #AAAAAA;  
+  float:left; 
+  -webkit-border-radius: 5px;
+  -moz-border-radius  : 5px;   
+}
+.scSearch:hover {
+  color:#FFF;  /* 0464BB */
+  background-color:   #5A5655;
+  border: 1px solid #5A5655; 
+}
+.scRemove { 
+  display:block;  
+  margin:0;
+  margin-top:0px;
+  margin-left:3px;    
+  padding:0;
+  padding-top:3px;
+  text-decoration: none;
+  height:17px;
+  width:70px;
+  color:#5A5655;  /* 0464BB */
+  font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+  outline-style:none;
+  text-align:center;
+  background-color:   #FCFCFC;
+  border: 1px solid #AAAAAA;  
+  float:left; 
+  -webkit-border-radius: 5px;
+  -moz-border-radius  : 5px;   
+}
+.scRemove:hover {
+  color:#FFF;  /* 0464BB */
+  background-color:   #5A5655;
+  border: 1px solid #5A5655; 
+}
+.scAddToCart { 
+  display:block;
+  margin:0;
+  margin-top:12px;  
+  padding:0;
+  padding-top:5px;
+  text-decoration: none;
+  height:18px;
+  width:80px;
+  color:#5A5655;  /* 0464BB */
+  font: normal 11px Verdana, Arial, Helvetica, sans-serif;
+  outline-style:none;
+  text-align:center;
+  background-color:   #FCFCFC;
+  border: 1px solid #AAAAAA;  
+  float:right; 
+  -webkit-border-radius: 5px;
+  -moz-border-radius  : 5px;   
+}
+.scAddToCart:hover {
+  color:#FFF;  /* 0464BB */
+  background-color:   #5A5655;
+  border: 1px solid #5A5655; 
+}
+.scTxtQuantity {
+  margin-top:15px;
+  margin-right:5px;
+  border:1px solid #E0E0E0;
+  padding:1px 5px;
+  width:25px;
+  float:left;  
+}
+.scTxtQuantity2 {
+  margin-top:0px;
+  margin-right:0px;
+  border:1px solid #E0E0E0;
+  padding:1px 5px;
+  width:25px;
+  float:left;  
+}
+.scLabelQuantity {
+  margin-top:15px;
+  margin-right:0px;
+  padding:1px 5px;
+  float:left;
+}
+.scLabelSubtotalText {
+  display:block;
+  margin-top:5px;
+  margin-right:0px;
+  padding:3px;
+  font: bold 18px Verdana, Arial, Helvetica, sans-serif;  
+  float:right;
+}
+.scLabelSubtotalValue {
+  display:block;
+  margin-top:3px;
+  margin-left:5px;
+  margin-right:20px;
+  padding:5px;
+  background:#F5F5F5;
+  font: bold 18px Verdana, Arial, Helvetica, sans-serif;  
+  border: 1px solid #AAAAAA;  
+  float:right;
+}
+.scCheckoutButton { 
+  display:block;
+  margin:0;
+  margin-top:4px; 
+  margin-right:10px;   
+  padding:0;
+  padding-top:7px;
+  text-decoration: none;
+  height:22px;
+  width:180px;
+  color:#FFF; 
+  font: bold 13px Verdana, Arial, Helvetica, sans-serif;
+  outline-style:none;
+  text-align:center;
+  background-color:   #5A5655;
+  border: 1px solid #5A5655;   
+  -webkit-border-radius: 5px;
+  -moz-border-radius  : 5px; 
+  float:right;  
+}
+.scCheckoutButton:hover { 
+  color:#FFF;
+  background-color:   #EA8511;
+  border: 1px solid #EA8511; 
+}
+.scMessageBar {
+  position:relative;
+  margin:0;
+  padding:10px;
+  top:10px; 
+  left:4%;   
+  font: bold 13px Verdana, Arial, Helvetica, sans-serif; 
+  color: #5A5655;
+  background:   #FFFFDD;
+  border: 1px solid #FFD700;
+  width:90%;
+  height:18px;
+  text-align:center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius  : 5px;   
+}
+
+.scMessageBar2 {
+  position:relative;
+  margin:0;
+  margin-left:10px;
+  margin-right:10px;  
+  padding:5px;  
+  padding-left:5px;
+  padding-right:5px;  
+  top:3px;   
+  font: normal 12px Verdana, Arial, Helvetica, sans-serif; 
+  color: #000;
+  background:   #FFFFDD;
+  border: 1px solid #FFD700;
+  text-align:center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius  : 5px;   
+}
+
+/*  TOOLTIP CSS */
+.tooltip{
+  position:absolute;
+  z-index:999;
+  background-color:#AAA;
+  padding:0px;
+  border:1px solid #AAA;
+  color:#FFF; 
+  width:auto;   
+  text-align: left;    
+  overflow:visible;   
+}  
+
+.tooltip img{
+  border:0;
+  float:left;
+  background-color:#FFF;            
+}
