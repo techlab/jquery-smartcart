@@ -3,7 +3,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="description" content="Smart Cart 2 - a javascript jQuery shopping cart plugin" />
 <title>Smart Cart 2 - a javascript jQuery shopping cart plugin</title>
-<link href="styles/demo_style.css" rel="stylesheet" type="text/css">
 
 <!-- Smart Cart Files Include -->
 <link href="styles/smart_cart.css" rel="stylesheet" type="text/css">
@@ -36,20 +35,9 @@ $selected = 1; // let us display the cart first
   		$('#SmartCart').smartCart({selected:<? echo $selected; ?>});
 		});
 </script>
-
 </head>
 <body>
-<div class="demoHead">   
-  <h1>Smart Cart 2 - a javascript jQuery shopping cart plugin</h1>
-  <h2>Basic Example</h2>
-  <br />
-  <br />
-  <a href="index.htm" class="selected">Basic Example</a>
-  <a href="SmartCart2-Events.htm" class="btn">Example with Events</a>
-  <a href="SmartCart2-MultipleCart.htm" class="btn">Multiple Cart Example</a>
-  <a href="http://techlaboratory.net/products.php?product=scat" class="btn">Go to Home</a>
-</div>
-  
+ 
 <table align="center" border="0" cellpadding="0" cellspacing="0">
 <tr><td>
     <form action="results.php" method="post">
@@ -79,9 +67,6 @@ $selected = 1; // let us display the cart first
     </div>
     <!-- Smart Cart HTML Ends -->
     </form>
-    
-<br /><br />
-
 </td></tr>
 </table>
 

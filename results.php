@@ -3,47 +3,10 @@
 <head>
 	<meta name="description" content="Smart Cart 2 - a javascript jQuery shopping cart plugin" />  
   <title>Smart Cart 2 - a javascript jQuery shopping cart plugin</title>
-  <link href="styles/demo_style.css" rel="stylesheet" type="text/css">
 
   <link href="styles/smart_cart.css" rel="stylesheet" type="text/css">
-  
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-18629864-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>  
-  
 </head>
 <body>
-<div class="demoHead">   
-  <h1>Smart Cart 2 - a javascript jQuery shopping cart plugin</h1>
-  <h2>Basic Example</h2>
-  <br />
-    <script type="text/javascript"><!--
-    google_ad_client = "pub-8226185437441708";
-    /* TechDemoTop 728x90 */
-    google_ad_slot = "7531608375";
-    google_ad_width = 728;
-    google_ad_height = 90;
-    //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-  <br />&nbsp;
-  <br />
-  <a href="index.htm" class="selected">Basic Example</a>
-  <a href="SmartCart2-Events.htm" class="btn">Example with Events</a>
-  <a href="SmartCart2-MultipleCart.htm" class="btn">Multiple Cart Example</a>
-  <a href="http://techlaboratory.net/products.php?product=scat" class="btn">Go to Home</a>
-</div>
 <table align="center" border="0" cellpadding="0" cellspacing="0">
 <tr><td>                    
 <div class="scMain">  
@@ -133,21 +96,6 @@ if(!empty($product_list)) {
 }
 ?>
 </div>
-
-  <br /><br />
-  <script type="text/javascript"><!--
-  google_ad_client = "pub-8226185437441708";
-  /* TechDemoBottom 728x90 */
-  google_ad_slot = "4801936038";
-  google_ad_width = 728;
-  google_ad_height = 90;
-  //-->
-  </script>
-  <script type="text/javascript"
-  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-  </script>
-  <br />&nbsp;
-
 </td></tr>
 </table>
 
