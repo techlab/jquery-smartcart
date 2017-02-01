@@ -1,5 +1,9 @@
-Overview
---------
+> ### SmartCart v3-Alpha is on move!  
+> Checkout the [First Look Demo](http://techlaboratory.net/demos/jquery-SmartCartv3Alpha/examples/index.html) and also you can track the progress on the [GitHub Branch](https://github.com/techlab/SmartCart/tree/v3-alpha)
+
+
+# SmartCart 2
+
 Smart Cart 2 is a flexible and feature rich jQuery plug-in for shopping cart. 
 It makes the add-to-cart section of online shopping much easy and user friendly. 
 It is compact in design, very easy to implement and only minimal HTML required.
