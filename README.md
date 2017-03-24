@@ -1,5 +1,5 @@
-# SmartCart v3-Alpha1
-#### The best jQuery shopping cart plugin with Bootstrap support.
+# SmartCart v3-Alpha
+#### The awesome jQuery Shopping Cart Plugin with PayPal payment support.
 
 > Notice:- This is an alpha release for preview and tests, some or many functionalities may not work as expected. 
 > Usage on production environment is not recommended unless tested well. 
@@ -17,7 +17,7 @@ Requirements
 
 Version
 -----
-**SmartCart v3-Alpha1**
+**SmartCart v3-Alpha2**
 
 License
 ----

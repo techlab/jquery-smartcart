@@ -1,5 +1,6 @@
-/* SmartCart v3-Alpha1
- * jQuery Shopping Cart Plugin
+/*!
+ * jQuery SmartCart v3.0.1
+ * The awesome jQuery Shopping Cart Plugin with PayPal payment support
  * http://www.techlaboratory.net/smartcart
  *
  * Created by Dipu Raj
@@ -13,17 +14,17 @@
     "use strict";
     // Default options
     var defaults = {
-            cartList: [], // initial products in cart
+            cart: [], // initial products in cart
             resultName: 'cart_list', 
             theme: 'default', // theme for the cart, related css need to include for other than default theme
             combineProducts: true, // combine similar products on cart
-            highlightEffect: true,
+            highlightEffect: true, // highlight effect on adding/updating product in cart
             cartItemTemplate: '<img class="img-responsive pull-left" src="{product_image}" /><h4 class="list-group-item-heading">{product_name}</h4><p class="list-group-item-text">{product_desc}</p>',
             cartItemQtyTemplate: '{display_price} × {display_quantity} = {display_amount}',
             productContainerSelector: '.sc-product-item',
             productElementSelector: '*', // input, textarea, select, div, p
             addCartSelector: '.sc-add-to-cart',
-            lang: {  // Language variables for button
+            lang: {  // Language variables
                 checkout: 'Checkout',
                 clear: 'Clear',
                 subtotal: 'Subtotal:',
@@ -41,7 +42,8 @@
                 toolbarButtonPosition: 'right', // left, right
                 toolbarExtraButtons: [] // Extra buttons to show on toolbar, array of jQuery input/buttons elements
             },
-            cartDeleteAnimation: ''
+            cartDeleteAnimation: '',
+            debug: true
         };
 
     // The plugin constructor
@@ -162,14 +164,14 @@
             var mi = this;
             
             if (!p.hasOwnProperty('product_price')) {
-                $.error( 'Price is not set for the item' );
+                this._logMessage('Price is not set for the item');
                 return false;
             }
             
             if (!p.hasOwnProperty('unique_key')) {
-                var d = new Date();
-                p.unique_key =  d.getTime();
+                p.unique_key =  this._getUniqueKey();
             }
+            
             if (!p.hasOwnProperty('product_quantity')) {
                 p.product_quantity = 1;
             }
@@ -182,11 +184,17 @@
                     var idx = this.cart.indexOf(pf[0]);
                     this.cart[idx].product_quantity = (this.cart[idx].product_quantity - 0) + (p.product_quantity - 0);  
                     p = this.cart[idx];
+                    // Trigger "itemUpdated" event
+                    this._triggerEvent("itemUpdated", [p]);
                 }else{
                     this.cart.push(p); 
+                    // Trigger "itemAdded" event
+                    this._triggerEvent("itemAdded", [p]);
                 }
             }else{
                 this.cart.push(p);
+                // Trigger "itemAdded" event
+                this._triggerEvent("itemAdded", [p]);
             }
             
             this._addUpdateCartItem(p);
@@ -196,15 +204,21 @@
             var mi = this;
             $.each( this.cart, function( i, n ) {
                 if(n.unique_key === unique_key){
+                    var itemRemove = mi.cart[i];
                     mi.cart.splice(i, 1);
                     $('*[data-product-unique-key="' + unique_key + '"]').removeClass('sc-added-item');
                     mi._hasCartChange();
+                    
+                    // Trigger "itemRemoved" event
+                    this._triggerEvent("itemRemoved", [itemRemove]);
                     return false;
                 }
             });
         },
         _clearCart: function () {
             this.cart = [];
+            // Trigger "cartCleared" event
+            this._triggerEvent("cartCleared");
             this._hasCartChange();
         },
         _updateCartQuantity: function (unique_key, qty) {
@@ -216,6 +230,8 @@
                         mi.cart[i].product_quantity = qty;   
                     }
                     mi._addUpdateCartItem(mi.cart[i]);
+                    // Trigger "cartEmpty" event
+                    this._triggerEvent("quantityUpdate", [mi.cart[i], qty]);
                     return false;
                 }
             });
@@ -258,6 +274,9 @@
             if(this.cart.length === 0){
                 $('.sc-cart-item-list',this.cart_element).empty().append($('<div class="sc-cart-empty-msg">Cart is Empty!<br />Choose your products</div>'));
                 $(this.options.productContainerSelector).removeClass('sc-added-item');
+                
+                // Trigger "cartEmpty" event
+                this._triggerEvent("cartEmpty");
             }else{
                 $('.sc-cart-item-list > .sc-cart-empty-msg',this.cart_element).remove();
             }
@@ -275,10 +294,10 @@
         },
         _submitCart: function () {
             var mi = this;
+            var formElm = this.cart_element.parents('form');
             if(this.options.submitType === 'ajax'){
                 
             }else if(this.options.submitType === 'paypal'){
-                var formElm = this.cart_element.parents('form');
                 if(formElm.length > 0){
                     formElm.children('.sc-paypal-input').remove();
                     // Add paypal specific fields for cart products
@@ -292,14 +311,13 @@
                     
                     formElm.submit();
                 }else{
-                    $.error( 'Form not found to submit to paypal' );
+                    this._logMessage('Form not found to submit to paypal');
                 }
             }else{
-                var formElm = this.cart_element.parents('form');
                 if(formElm.length > 0){
                     formElm.submit();
                 }else{
-                    $.error( 'Form not found to submit' );
+                    this._logMessage( 'Form not found to submit' );
                 }
             }
             return true;
@@ -367,6 +385,15 @@
             this.cart_element.trigger(e, params);
             if (e.isDefaultPrevented()) { return false; }
             return e.result;
+        },
+        _getUniqueKey: function () {
+            var d = new Date();
+            return d.getTime();
+        },
+        _logMessage: function (msg) {
+            if(this.options.debug !== true) { return false; }
+            // Log message
+            $.error(msg);
         },
 
 // PUBLIC FUNCTIONS
