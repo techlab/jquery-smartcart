@@ -71,6 +71,10 @@
     text-align: right;
 }
 
+.sc-cart-toolbar button {
+    margin-left: 5px;
+}
+
 .sc-cart-item img {
     margin-right: 10px;
     width: 60px;
@@ -151,4 +155,64 @@
     padding: 0;
     width: 170px;
     height: 32px;
+}
+
+/* Loader Animation
+Courtesy: http://bootsnipp.com/snippets/featured/loading-button-effect-no-js
+*/
+@-webkit-keyframes ld {
+    0% {
+        -webkit-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        -webkit-transform: rotate(180deg) scale(1.1);
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg) scale(1);
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes ld {
+    0% {
+        -webkit-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        -webkit-transform: rotate(180deg) scale(1.1);
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg) scale(1);
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.loading:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    background: transparent;
+    border-radius: 50%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #4285f4;
+    border-right-color: #4285f4;
+    top: 50%;
+    left: 50%;
+    margin-top: -16px;
+    margin-left: -16px;
+    width: 32px;
+    height: 32px;
+    -webkit-animation: ld 1s ease-in-out infinite;
+    animation: ld 1s ease-in-out infinite;
 }

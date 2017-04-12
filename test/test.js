@@ -2,9 +2,11 @@ describe('Plugin Default Init', function() {
     var el, plugin;
 
     beforeEach(function(){
-        el = $('<div id="test-element"></div>');
-        $(document.body).append(el);
-        plugin = el.smartCart();
+        jasmine.getFixtures().fixturesPath = 'base/test';
+        loadFixtures('test-template.html');
+
+        el = $('#smartwizard');
+        plugin = el.smartWizard();
     });
     
     afterEach(function(){
@@ -21,9 +23,11 @@ describe('Plugin with Option Init', function() {
     var el, plugin;
 
     beforeEach(function(){
-        el = $('<div id="test-element"></div>');
-        $(document.body).append(el);
-        plugin = el.smartCart({ theme: 'blue'});
+        jasmine.getFixtures().fixturesPath = 'base/test';
+        loadFixtures('test-template.html');
+
+        el = $('#smartwizard');
+        plugin = el.smartWizard();
     });
     
     afterEach(function(){

@@ -1,7 +1,7 @@
-# SmartCart v3-Alpha
+# SmartCart v3-Beta
 #### The awesome jQuery Shopping Cart Plugin with PayPal payment support.
 
-> Notice:- This is an alpha release for preview and tests, some or many functionalities may not work as expected. 
+> Notice:- This is an Beta release for preview and tests, some or many functionalities may not work as expected. 
 > Usage on production environment is not recommended unless tested well. 
 > Please report issue at [GitHub Issues](https://github.com/techlab/SmartCart/issues/)
 
@@ -17,8 +17,8 @@ Requirements
 
 Version
 -----
-**SmartCart v3-Alpha2**
+**SmartCart v3-Beta1**
 
 License
 ----
-[MIT License](https://github.com/techlab/SmartCart/blob/v3-alpha/LICENSE)
+[MIT License](https://github.com/techlab/SmartCart/blob/v3-beta/LICENSE)

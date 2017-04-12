@@ -18,3 +18,4 @@ coverage
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+/examples/test-page.html
