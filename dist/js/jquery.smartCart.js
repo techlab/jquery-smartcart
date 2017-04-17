@@ -15,8 +15,8 @@
     // Default options
 
     var defaults = {
-        cart: [], // initial products in cart
-        resultName: 'cart_list',
+        cart: [], // initial products on cart
+        resultName: 'cart_list', // Submit name of the cart parameter
         theme: 'default', // theme for the cart, related css need to include for other than default theme
         combineProducts: true, // combine similar products on cart
         highlightEffect: true, // highlight effect on adding/updating product in cart
@@ -315,7 +315,7 @@
                     }
                     mi._addUpdateCartItem(mi.cart[i]);
                     // Trigger "quantityUpdate" event
-                    this._triggerEvent("quantityUpdate", [mi.cart[i], qty]);
+                    this._triggerEvent("quantityUpdated", [mi.cart[i], qty]);
                     return false;
                 }
             });

@@ -1,0 +1,31 @@
+{
+    "name": "techlab/jquery-smartcart",
+    "description": "The smart interactive jQuery Shopping Cart plugin with PayPal payment support",
+    "homepage": "http://techlaboratory.net/smartcart",
+    "license": "MIT",      
+    "support": {
+        "source": "https://github.com/techlab/SmartCart",
+        "issues": "https://github.com/techlab/SmartCart/issues",
+        "docs": "http://techlaboratory.net/smartcart/documentation"
+        },
+    "keywords": [
+        "jquery",
+        "cart",
+        "paypal",
+        "shopping",
+        "bootstrap",
+        "ui",
+        "jquery-plugin"
+    ],
+    "authors": [
+        {
+            "name": "Dipu Raj",
+            "email": "hello@techlaboratory.net",
+            "homepage": "http://dipuraj.me"
+        }
+    ],
+    "require": {
+        "components/jquery": ">=1.9",
+        "components/bootstrap": ">=3.0.0" 
+    }
+}
