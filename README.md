@@ -19,7 +19,6 @@ Screenshots
 -----
 ![Smart Cart Screenshot1](http://techlaboratory.net/assets/media/products/SmartCart3-Normal.png?v1)
 ![Smart Cart Screenshot2](http://techlaboratory.net/assets/media/products/SmartCart3-PayPal.png?v1)
-![Smart Cart Screenshot3](http://techlaboratory.net/assets/media/products/SmartCart3-Cart.png?v1)
 
 Requirements
 -----
