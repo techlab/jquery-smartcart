@@ -1,6 +1,6 @@
 /*! 
- * jQuery SmartCart v3.x
- * The awesome jQuery Shopping Cart Plugin with PayPal payment support
+ * jQuery Smart Cart v3.x
+ * The smart interactive jQuery Shopping Cart plugin with PayPal payment support
  * http://www.techlaboratory.net/smartcart
  *
  * Created by Dipu Raj
@@ -49,7 +49,6 @@
 
 .sc-cart-item-summary{
     text-align: right;
-    /*border-top: 1px solid #eeeeee;*/
     margin-top: 5px;
     padding-top: 5px;
 }
@@ -57,23 +56,29 @@
 .sc-cart-summary{
     text-align: right;
     font-size: 1.5em;
-    /*font-weight: 400;*/ 
 }
+
 .sc-cart-subtotal{
     
 }
+
 .sc-cart-toolbar{
+    margin-top: 10px;
     text-align: right;
 }
+
 .sc-cart-toolbar button {
     margin-left: 5px;
 }
+
+.sc-cart-toolbar button.disabled img {
+    opacity: .5;
+}
+
 .sc-cart-item img{
     margin-right: 10px;
     width: 60px;
 }
-
-
 
 .sc-highlight {
 	animation: highlight 1s;
@@ -102,6 +107,7 @@
 .sc-product-item {
     position: relative;
 }
+
 .sc-product-item:after, .sc-product-item:before {
     transition: all 0.2s ease-in-out 0s;
 }
@@ -109,6 +115,7 @@
 .sc-added-item {
     border-color: #5cb85c;
 }
+
 .sc-added-item:after {
     content:  "\2713 ";
     display: inline-block;
@@ -121,6 +128,7 @@
     font-weight:bold; 
     white-space: nowrap;
 }
+
 .sc-added-item:before {
     content: "";
     display: inline-block;
@@ -147,51 +155,4 @@
     padding: 0;
     width: 170px;
     height: 32px;
-}
-
-/* Loader Animation
-Courtesy: http://bootsnipp.com/snippets/featured/loading-button-effect-no-js
-*/
-@-webkit-keyframes ld {
-  0%   { transform: rotate(0deg) scale(1); }
-  50%  { transform: rotate(180deg) scale(1.1); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-@-moz-keyframes ld {
-  0%   { transform: rotate(0deg) scale(1); }
-  50%  { transform: rotate(180deg) scale(1.1); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-@-o-keyframes ld {
-  0%   { transform: rotate(0deg) scale(1); }
-  50%  { transform: rotate(180deg) scale(1.1); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-@keyframes ld {
-  0%   { transform: rotate(0deg) scale(1); }
-  50%  { transform: rotate(180deg) scale(1.1); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-.loading:before {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    background: transparent;
-    border-radius: 50%;
-    box-sizing: border-box;
-    border: 2px solid #fff;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-    border-left-color: #4285f4;
-    border-right-color: #4285f4;
-    top: 50%;
-    left: 50%;
-    margin-top: -16px;
-    margin-left: -16px;
-    width: 32px;
-    height: 32px;
-    -webkit-animation: ld 1s ease-in-out infinite;
-    -moz-animation:    ld 1s ease-in-out infinite;
-    -o-animation:      ld 1s ease-in-out infinite;
-    animation:         ld 1s ease-in-out infinite;
 }

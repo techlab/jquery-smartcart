@@ -297,14 +297,25 @@
             </div>
             
             <aside class="col-md-4">
+                <!-- Paypal Submit URL : https://www.paypal.com/cgi-bin/webscr -->
+                <!-- Paypal Sandbox Submit URL: https://www.sandbox.paypal.com/cgi-bin/webscr -->      
                 
-                <!-- Cart submit form -->
-                <form action="results.php" method="POST"> 
+                <!-- Paypal Cart submit form -->
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="POST"> 
                     <!-- SmartCart element -->
                     <div id="smartcart" class=""></div>
+                    
+                    <!-- Paypal required info, Please update based on your details -->
+                    <input name="business" value="dipumedayil@gmail.com" type="hidden">            
+                    <input name="currency_code" value="USD" type="hidden">
+                    <input name="return" value="http://www.yourdomain.com/yoursuccessurl" type="hidden">            
+                    <input name="cancel_return" value="http://www.yourdomain.com/yourcancelurl" type="hidden">
+                    
+                    <input name="cmd" value="_cart" type="hidden">    
+                    <input name="upload" value="1" type="hidden">            
                 </form>
-                
             </aside>
+            
         </div>
     </section>
     
@@ -316,7 +327,14 @@
     <script type="text/javascript">
         $(document).ready(function(){
             // Initialize Smart Cart    	
-            $('#smartcart').smartCart();
+            $('#smartcart').smartCart({
+                                submitSettings: {
+                                    submitType: 'paypal' // form, paypal, ajax
+                                },
+                                toolbarSettings: {
+                                    checkoutButtonStyle: 'paypal' // default, paypal, image
+                                }
+                            });
 		});
     </script>
 </body>

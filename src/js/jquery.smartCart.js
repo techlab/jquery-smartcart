@@ -1,6 +1,6 @@
 /*!
- * jQuery SmartCart v3.0.1-beta
- * The awesome jQuery Shopping Cart Plugin with PayPal payment support
+ * jQuery Smart Cart v3.0.1
+ * The smart interactive jQuery Shopping Cart plugin with PayPal payment support
  * http://www.techlaboratory.net/smartcart
  *
  * Created by Dipu Raj
@@ -31,6 +31,7 @@
                 productId: 'product_id',
             },
             lang: {  // Language variables
+                cartTitle: "Shopping Cart",
                 checkout: 'Checkout',
                 clear: 'Clear',
                 subtotal: 'Subtotal:',
@@ -59,7 +60,7 @@
                 checkoutButtonImage: '', // image for the checkout button
                 toolbarExtraButtons: [] // Extra buttons to show on toolbar, array of jQuery input/buttons elements
             },
-            debug: true
+            debug: false
         };
 
     // The plugin constructor
@@ -79,28 +80,43 @@
         init: function () {
             // Set the elements
             this._setElements();
+            
             // Add toolbar
             this._setToolbar();
+            
             // Assign plugin events
             this._setEvents();
+            
+            // Set initial products
+            var mi = this;
+            $(this.options.cart).each(function(i, p) {
+                p = mi._addToCart(p);
+            });
+            
             // Call UI sync
             this._hasCartChange();
         },
 
 // PRIVATE FUNCTIONS
-
+        /* 
+         * Set basic elements for the cart
+         */
         _setElements: function () {
+            // The element store all cart data and submit with form
             var cartListElement = $('<input type="hidden" name="' + this.options.resultName + '" id="' + this.options.resultName + '" />');
             this.cart_element.append(cartListElement);
-            // Set the cart element
+            // Set the cart main element
             this.cart_element.addClass('panel panel-default sc-cart sc-theme-' + this.options.theme);
-            this.cart_element.append('<div class="panel-heading sc-cart-heading">Shopping Cart <span class="sc-cart-count badge">0</span></div>');
+            this.cart_element.append('<div class="panel-heading sc-cart-heading">' + this.options.lang.cartTitle + ' <span class="sc-cart-count badge">0</span></div>');
             this.cart_element.append('<div class="list-group sc-cart-item-list"></div>');
         },
+        /* 
+         * Set the toolbar for the cart 
+         */
         _setToolbar: function () {
             if(this.options.toolbarSettings.showToolbar !== true) { return false; }
             
-            var toolbar = $('<div></div>').addClass('panel-footer');
+            var toolbar = $('<div></div>').addClass('panel-footer sc-toolbar');
             var toolbarButtonPanel = $('<div class="sc-cart-toolbar">');
             var toolbarSummaryPanel = $('<div class="sc-cart-summary">');
             
@@ -143,6 +159,9 @@
             toolbar.append(toolbarButtonPanel);
             this.cart_element.append(toolbar);
         },
+        /* 
+         * Set events for the cart
+         */
         _setEvents: function () {
             var mi = this;
             // Capture add to cart button events
@@ -153,6 +172,7 @@
                 $(this).parents(mi.options.productContainerSelector).addClass('sc-added-item').attr('data-product-unique-key', p.unique_key);
             });
             
+            // Item remove event
             $(this.cart_element).on( "click", '.sc-cart-remove', function(e) {
                 e.preventDefault();
                 $(this).parents('.sc-cart-item').fadeOut( "normal", function() {
@@ -162,17 +182,20 @@
                 });
             });
             
+            // Item quantity change event
             $(this.cart_element).on( "change", '.sc-cart-item-qty', function(e) {
                 e.preventDefault();
                 mi._updateCartQuantity($(this).parents('.sc-cart-item').data('unique-key'), $(this).val());
             });
             
+            // Cart checkout event
             $(this.cart_element).on( "click", '.sc-cart-checkout', function(e) {
                 if($(this).hasClass('disabled')) { return false; }
                 e.preventDefault();
                 mi._submitCart();
             });
             
+            // Cart clear event
             $(this.cart_element).on( "click", '.sc-cart-clear', function(e) {
                 if($(this).hasClass('disabled')) { return false; }
                 e.preventDefault();
@@ -195,7 +218,7 @@
                 .each(function() {
                     if ($(this).is('[name]') === true || typeof $(this).data('name') !== typeof undefined) {
                         var key = $(this).attr('name') ? $(this).attr('name') : $(this).data('name'); 
-                        var val = mi._getContent($(this)); // $(this).val() ? $(this).val() : $(this).text(); 
+                        var val = mi._getContent($(this));
                         if(key && val){
                             p[key] = val;    
                         }
@@ -203,6 +226,9 @@
                 });
             return p;
         },
+        /* 
+         * Add the product object to the cart
+         */
         _addToCart: function (p) {
             var mi = this;
             
@@ -219,7 +245,7 @@
             if (!p.hasOwnProperty('unique_key')) {
                 p.unique_key =  this._getUniqueKey();
             }
-            
+
             if(this.options.combineProducts){
                 var pf = $.grep(this.cart, function(n, i){
                     return mi._isObjectsEqual(n, p);
@@ -244,6 +270,9 @@
             this._addUpdateCartItem(p);
             return p;
         },
+        /* 
+         * Remove the product object from the cart
+         */
         _removeFromCart: function (unique_key) {
             var mi = this;
             $.each( this.cart, function( i, n ) {
@@ -259,27 +288,36 @@
                 }
             });
         },
+        /* 
+         * Clear all products from the cart
+         */
         _clearCart: function () {
             this.cart = [];
             // Trigger "cartCleared" event
             this._triggerEvent("cartCleared");
             this._hasCartChange();
         },
+        /* 
+         * Update the quantity of an item in the cart
+         */
         _updateCartQuantity: function (unique_key, qty) {
             var mi = this;
             var qv = this._getValidateNumber(qty);
             $.each( this.cart, function( i, n ) {
                 if(n.unique_key === unique_key){
                     if(qv){
-                        mi.cart[i][this.options.paramSettings.productQuantity] = qty;   
+                        mi.cart[i][mi.options.paramSettings.productQuantity] = qty;   
                     }
                     mi._addUpdateCartItem(mi.cart[i]);
-                    // Trigger "cartEmpty" event
+                    // Trigger "quantityUpdate" event
                     this._triggerEvent("quantityUpdate", [mi.cart[i], qty]);
                     return false;
                 }
             });
         },
+        /* 
+         * Update the UI of the cart list
+         */
         _addUpdateCartItem: function (p) {
             var productAmount = (p[this.options.paramSettings.productQuantity] - 0) * (p[this.options.paramSettings.productPrice] - 0);
             var cartList = $('.sc-cart-item-list',this.cart_element); 
@@ -302,6 +340,7 @@
                 cartList.append(elmMain);
             }
             
+            // Apply the highlight effect
             if(this.options.highlightEffect === true){
                 elmMain.addClass('sc-highlight');
                 setTimeout(function() {
@@ -311,9 +350,12 @@
             
             this._hasCartChange();
         },
+        /* 
+         * Handles the changes in the cart 
+         */
         _hasCartChange: function () {
             $('.sc-cart-count',this.cart_element).text(this.cart.length);
-            $('.sc-cart-subtotal',this.element).text( '' + this._getCartSubtotal());
+            $('.sc-cart-subtotal',this.element).text(this._getCartSubtotal());
             
             if(this.cart.length === 0){
                 $('.sc-cart-item-list',this.cart_element).empty().append($('<div class="sc-cart-empty-msg">' + this.options.lang.cartEmpty + '</div>'));
@@ -326,8 +368,13 @@
                 $('.sc-cart-item-list > .sc-cart-empty-msg',this.cart_element).remove();
                 $('.sc-cart-checkout, .sc-cart-clear').removeClass('disabled');
             }
+            
+            // Update cart value to the  cart hidden element 
             $('#' + this.options.resultName, this.cart_element).val(JSON.stringify(this.cart));
         },
+        /* 
+         * Calculates the cart subtotal
+         */
         _getCartSubtotal: function () {
             var mi = this;
             var subtotal = 0;
@@ -338,6 +385,9 @@
             });
             return this._getMoneyFormatted(subtotal);
         },
+        /* 
+         * Cart submit functionalities
+         */
         _submitCart: function () {
             var mi = this;
             var formElm = this.cart_element.parents('form');
@@ -376,10 +426,10 @@
                     // Add paypal specific fields for cart products
                     $.each(this.cart, function( i, p ) {   
                         var itemNumber = i + 1;
-                        formElm.append('<input class="sc-paypal-input" name="item_number_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[this.options.paramSettings.productId]) + '" type="hidden">')
-                               .append('<input class="sc-paypal-input" name="item_name_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[this.options.paramSettings.productName]) + '" type="hidden">')
-                               .append('<input class="sc-paypal-input" name="amount_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[this.options.paramSettings.productPrice]) + '" type="hidden">')
-                               .append('<input class="sc-paypal-input" name="quantity_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[this.options.paramSettings.productQuantity]) + '" type="hidden">');
+                        formElm.append('<input class="sc-paypal-input" name="item_number_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[mi.options.paramSettings.productId]) + '" type="hidden">')
+                               .append('<input class="sc-paypal-input" name="item_name_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[mi.options.paramSettings.productName]) + '" type="hidden">')
+                               .append('<input class="sc-paypal-input" name="amount_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[mi.options.paramSettings.productPrice]) + '" type="hidden">')
+                               .append('<input class="sc-paypal-input" name="quantity_' + itemNumber + '" value="' + mi._getValueOrEmpty(p[mi.options.paramSettings.productQuantity]) + '" type="hidden">');
                     });
 
                     formElm.submit();
@@ -397,7 +447,9 @@
         },
         
 // HELPER FUNCTIONS
-        
+        /* 
+         * Get the content of an HTML element irrespective of its type
+         */
         _getContent: function (elm) {
             if(elm.is(":checkbox, :radio")){
                 return elm.is(":checked") ? elm.val() : '';
@@ -410,6 +462,9 @@
             }
             return '';
         },
+        /* 
+         * Compare equality of two product objects
+         */
         _isObjectsEqual: function (o1, o2) {
             if (Object.getOwnPropertyNames(o1).length !== Object.getOwnPropertyNames(o2).length) {
                 return false;
@@ -427,13 +482,22 @@
             }
             return true;
         },
+        /* 
+         * Format money
+         */
         _getMoneyFormatted: function (n) {
             n = n - 0;
             return Number(n.toFixed(2)).toLocaleString(this.options.currencySettings.locales, this.options.currencySettings.currencyOptions);
         },
+        /* 
+         * Get the value of an element and empty value if the element not exists 
+         */
         _getValueOrEmpty: function (v) {
             return (v && typeof v !== typeof undefined) ? v : '';
         },
+        /* 
+         * Validate Number
+         */
         _getValidateNumber: function (n) {
             n = n - 0;
             if(n && n > 0){
@@ -441,6 +505,9 @@
             }
             return false;
         },
+        /* 
+         * Small templating function
+         */
         _formatTemplate: function (t, o){
             var r = t.split("{"), fs = '';
             for(var i=0; i < r.length; i++){
@@ -453,6 +520,9 @@
             }
             return fs;
         },
+        /* 
+         * Event raiser
+         */
         _triggerEvent: function (name, params) {
             // Trigger an event
             var e = $.Event(name);
@@ -460,25 +530,40 @@
             if (e.isDefaultPrevented()) { return false; }
             return e.result;
         },
+        /* 
+         * Get unique key
+         */
         _getUniqueKey: function () {
             var d = new Date();
             return d.getTime();
         },
+        /* 
+         * Log message to console
+         */
         _logMessage: function (msg) {
             if(this.options.debug !== true) { return false; }
             // Log message
             console.log(msg);
         },
+        /* 
+         * Log error to console and terminate execution
+         */
         _logError: function (msg) {
             if(this.options.debug !== true) { return false; }
-            // Log message
+            // Log error
             $.error(msg);
         },
 
 // PUBLIC FUNCTIONS
+        /* 
+         * Public function to sumbit the cart
+         */
         submit: function () {
             this._submitCart();
         },
+        /* 
+         * Public function to clear the cart
+         */
         clear: function () {
             this._clearCart();
         }
