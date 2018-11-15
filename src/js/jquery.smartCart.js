@@ -283,7 +283,7 @@
                     mi._hasCartChange();
                     
                     // Trigger "itemRemoved" event
-                    this._triggerEvent("itemRemoved", [itemRemove]);
+                    mi._triggerEvent("itemRemoved", [itemRemove]);
                     return false;
                 }
             });
@@ -310,7 +310,7 @@
                     }
                     mi._addUpdateCartItem(mi.cart[i]);
                     // Trigger "quantityUpdate" event
-                    this._triggerEvent("quantityUpdated", [mi.cart[i], qty]);
+                    mi._triggerEvent("quantityUpdated", [mi.cart[i], qty]);
                     return false;
                 }
             });
