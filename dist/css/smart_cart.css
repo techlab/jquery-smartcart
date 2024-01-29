@@ -1,5 +1,6 @@
+@charset "UTF-8";
 /*! 
- * jQuery Smart Cart v3.x
+ * jQuery Smart Cart v4.x
  * The smart interactive jQuery Shopping Cart plugin with PayPal payment support
  * http://www.techlaboratory.net/smartcart
  *
@@ -7,8 +8,111 @@
  * http://dipuraj.me
  *
  * Licensed under the terms of the MIT License
- * https://github.com/techlab/SmartCart/blob/master/LICENSE
+ * https://raw.githubusercontent.com/techlab/jquery-smartcart/master/LICENSE
  */
+/* SmartTab Base Styles */
+.sc.st-loading {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.sc.st-loading::after {
+    content: "";
+    display: block;
+    position: absolute;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 2;
+    transition: all 0.2s ease;
+}
+
+.sc.st-loading::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 2rem;
+    height: 2rem;
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #3498db;
+    border-radius: 50%;
+    z-index: 10;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* SmartTab Theme: Default */
+.st-theme-default {
+    border: 1px solid #eee;
+}
+
+.st-theme-default > .tab-content > .tab-pane {
+    padding: 10px;
+}
+
+.st-theme-default > .nav {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.st-theme-default > .nav .nav-link {
+    position: relative;
+    background: transparent;
+    border: transparent;
+    height: 100%;
+    min-height: 100%;
+    color: #222 !important;
+    padding: 10px;
+    transition: all 250ms ease 0s;
+}
+
+.st-theme-default > .nav .nav-link::after {
+    content: "";
+    background: transparent;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: -1px;
+    transition: all 250ms ease 0s;
+    transform: scale(0);
+}
+
+.st-theme-default > .nav .nav-link.active {
+    color: #5bc0de !important;
+    cursor: pointer;
+}
+
+.st-theme-default > .nav .nav-link.active::after {
+    background: #5bc0de !important;
+    transform: scale(1);
+}
+
+.st-theme-default.st-vertical > .nav {
+    box-shadow: 0.125rem 0 0.25rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.st-theme-default.st-vertical > .nav .nav-link::after {
+    height: 100%;
+    width: 2px;
+    top: 0px;
+    left: auto;
+    right: -1px;
+}
 
 .sc-cart-item-list {
     min-height: 50px;
@@ -43,12 +147,8 @@
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-    -webkit-transition: border-color 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
-    transition: border-color 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
 }
 
 .sc-cart-item-summary {
@@ -62,9 +162,6 @@
     font-size: 1.5em;
 }
 
-.sc-cart-subtotal {
-}
-
 .sc-cart-toolbar {
     margin-top: 10px;
     text-align: right;
@@ -75,7 +172,7 @@
 }
 
 .sc-cart-toolbar button.disabled img {
-    opacity: .5;
+    opacity: 0.5;
 }
 
 .sc-cart-item img {
@@ -84,21 +181,10 @@
 }
 
 .sc-highlight {
-    -webkit-animation: highlight 1s;
     animation: highlight 1s;
 }
 
 @keyframes highlight {
-    from {
-        background: #faebcc;
-    }
-
-    to {
-        background: none;
-    }
-}
-
-@-webkit-keyframes highlight {
     from {
         background: #faebcc;
     }
@@ -113,7 +199,6 @@
 }
 
 .sc-product-item:after, .sc-product-item:before {
-    -webkit-transition: all 0.2s ease-in-out 0s;
     transition: all 0.2s ease-in-out 0s;
 }
 
@@ -122,7 +207,7 @@
 }
 
 .sc-added-item:after {
-    content: "\2713 ";
+    content: "✓";
     display: inline-block;
     position: absolute;
     top: 0;
@@ -143,13 +228,8 @@
     right: 0;
     border-style: solid;
     border-width: 0 40px 40px 0;
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
     transform: rotate(360deg);
-    border-color: rgba(255,255,255,0) #5cb85c rgba(255,255,255,0) rgba(255,255,255,0);
-}
-
-.sc-button-checkout-default {
+    border-color: rgba(255, 255, 255, 0) #5cb85c rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
 .sc-button-checkout-paypal {

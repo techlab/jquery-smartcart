@@ -1,21 +1,19 @@
-/mpp-sc.txt
-/bower_components
+/ref.txt
 /node_modules/
+/bower_components/
 /vendor/
-coverage
-.DS_Store
+/public/
 
 # IDE Files
 #-------------------------
 /nbproject/
-/nbproject/private/
 .idea/*
 .vscode/*
-.tmp
+
 ## Sublime Text cache files
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
-/examples/test-page.html
+/nbproject/private/

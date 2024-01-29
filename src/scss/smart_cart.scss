@@ -1,5 +1,5 @@
 /*! 
- * jQuery Smart Cart v3.x
+ * jQuery Smart Cart v4.x
  * The smart interactive jQuery Shopping Cart plugin with PayPal payment support
  * http://www.techlaboratory.net/smartcart
  *
@@ -7,8 +7,17 @@
  * http://dipuraj.me
  *
  * Licensed under the terms of the MIT License
- * https://github.com/techlab/SmartCart/blob/master/LICENSE
+ * https://raw.githubusercontent.com/techlab/jquery-smartcart/master/LICENSE
  */
+
+@charset 'utf-8';
+
+/* SmartTab Base Styles */
+@import 'core/_base';
+
+/* SmartTab Theme: Default */
+@import 'themes/_default';
+
 
 .sc-cart-item-list{
     min-height: 50px;

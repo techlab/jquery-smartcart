@@ -1,17 +1,15 @@
-# Automatically ignored per:
-# https://www.npmjs.org/doc/developers.html#Keeping-files-out-of-your-package
-#
-# .*.swp
-# ._*
-# .DS_Store
-# .git
-# .hg
-# .lock-wscript
-# .svn
-# .wafpickle-*
-# CVS
-# npm-debug.log
-# node_modules
+.*.swp
+._*
+.DS_Store
+.git
+.github
+.gitignore
+.hg
+.lock-wscript
+.svn
+.wafpickle-*
+CVS
+npm-debug.log
 
 *.seed
 *.log
@@ -27,6 +25,7 @@ work
 build
 src
 test
+examples
 spec
 pids
 logs
@@ -36,10 +35,20 @@ lib-cov
 html-report
 xunit.xml
 
+# IDE Files
+#-------------------------
+/nbproject/*
+.idea/*
+.vscode/*
 .project
 .idea
 .settings
 .iml
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
 *.sublime-workspace
 *.sublime-project
 
@@ -50,3 +59,15 @@ Thumbs.db
 .LSOverride
 .Spotlight-V100
 .Trashes
+
+/node_modules/
+/bower_components/
+/vendor/
+
+/ref.txt
+/CODE_OF_CONDUCT.md
+/CONTRIBUTING.md
+/composer.json
+/gulpfile.js
+/karma.conf.js
+/.travis.yml

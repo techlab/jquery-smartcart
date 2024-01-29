@@ -1,0 +1,75 @@
+// Colors
+$border-main-color              : #eee;
+$nav-text-color                 : #222;
+$nav-background-color           : transparent;
+$nav-active-text-color          : #5bc0de;
+$nav-active-background-color    : #5bc0de;
+
+.st-theme-default {
+  border: 1px solid $border-main-color;
+
+  // Content style
+  & > .tab-content {
+
+    & > .tab-pane {
+      padding: 10px;
+    }
+  }
+
+  // Navigation style
+  & > .nav {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
+
+    .nav-link {
+      position: relative;
+      background: transparent;
+      border: transparent;
+      height: 100%;
+      min-height: 100%;
+      color: $nav-text-color !important;
+      padding: 10px;
+      transition: all 250ms ease 0s;
+
+      &::after {
+        content: "";
+        background: $nav-background-color;
+        height: 2px;
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        bottom: -1px;
+        transition: all 250ms ease 0s;
+        transform: scale(0);
+      }
+
+      &.active {
+        color: $nav-active-text-color !important;
+        cursor: pointer;
+
+        &::after {
+          background: $nav-active-background-color !important;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  // Vertical navigation style
+  &.st-vertical {
+    & > .nav {
+      box-shadow: .125rem 0 .25rem rgba(0,0,0,.1)!important;
+
+      .nav-link {
+
+        &::after {
+          height: 100%;
+          width: 2px;
+          top: 0px;
+          left: auto;
+          right: -1px;
+        }
+      }
+    }
+  }
+
+}
