@@ -1,0 +1,15 @@
+// ============================================================================
+// SmartCart Theme Base Mixin
+// All themes extend this mixin with their own variable overrides
+// ============================================================================
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+// Shared theme base — apply border and shadow defaults
+@mixin sc-theme-base {
+    border-radius: $sc-border-radius;
+    box-shadow: var(--sc-shadow);
+    border: 1px solid var(--sc-border);
+    overflow: hidden;
+}

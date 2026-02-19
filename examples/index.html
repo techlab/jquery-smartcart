@@ -1,323 +1,611 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>jQuery Smart Cart - The smart interactive jQuery Shopping Cart plugin with PayPal payment support</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Smart Cart v4 — Demo</title>
+    <meta name="description" content="jQuery SmartCart v4 demo — themes, color presets, dark mode">
 
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    
-    <!-- Include SmartCart CSS -->
-    <link href="../dist/css/smart_cart.min.css" rel="stylesheet" type="text/css" />
+    <!-- SmartCart CSS (all themes bundled) -->
+    <link href="../dist/css/smartcart.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body[data-ui-theme="dark"] {
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+
+        /* ---- Header ---- */
+        .demo-header {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .demo-header h1 {
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .demo-header span {
+            font-size: 0.75rem;
+            background: #3b82f6;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 999px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* ---- Controls ---- */
+        .demo-controls {
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        body[data-ui-theme="dark"] .demo-controls {
+            background: #1e293b;
+            border-bottom-color: #334155;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        body[data-ui-theme="dark"] .control-label {
+            color: #94a3b8;
+        }
+
+        select,
+        .toggle-btn {
+            font-family: inherit;
+            font-size: 0.8125rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            background: #f8fafc;
+            color: #1e293b;
+            cursor: pointer;
+        }
+
+        body[data-ui-theme="dark"] select,
+        body[data-ui-theme="dark"] .toggle-btn {
+            background: #334155;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+
+        .toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: none;
+        }
+
+        /* Color swatches */
+        .color-swatches {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.15s, border-color 0.15s;
+        }
+
+        .swatch:hover {
+            transform: scale(1.2);
+        }
+
+        .swatch.active {
+            border-color: #1e293b;
+            transform: scale(1.15);
+        }
+
+        body[data-ui-theme="dark"] .swatch.active {
+            border-color: #f1f5f9;
+        }
+
+        .swatch[data-color="blue"] {
+            background: #3b82f6;
+        }
+
+        .swatch[data-color="teal"] {
+            background: #14b8a6;
+        }
+
+        .swatch[data-color="purple"] {
+            background: #8b5cf6;
+        }
+
+        .swatch[data-color="rose"] {
+            background: #f43f5e;
+        }
+
+        .swatch[data-color="amber"] {
+            background: #f59e0b;
+        }
+
+        .swatch[data-color="slate"] {
+            background: #475569;
+        }
+
+        /* ---- Layout ---- */
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .demo-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ---- Product grid ---- */
+        .products-heading {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 1rem;
+            color: inherit;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .sc-product-item {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        body[data-ui-theme="dark"] .sc-product-item {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .sc-product-item:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-body {
+            padding: 0.75rem;
+        }
+
+        .product-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin: 0 0 0.25rem;
+        }
+
+        .product-desc {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin: 0 0 0.5rem;
+        }
+
+        body[data-ui-theme="dark"] .product-desc {
+            color: #94a3b8;
+        }
+
+        .product-price {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        body[data-ui-theme="dark"] .product-price {
+            color: #f1f5f9;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .product-meta select {
+            flex: 1;
+            min-width: 60px;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.4rem;
+        }
+
+        .product-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .sc-add-to-cart {
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            padding: 0.35rem 0.8rem;
+            border: none;
+            border-radius: 0.375rem;
+            background: #3b82f6;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .sc-add-to-cart:hover {
+            background: #2563eb;
+        }
+
+        /* Added state on product */
+        .sc-added-item .sc-add-to-cart {
+            background: #22c55e;
+            pointer-events: none;
+        }
+    </style>
 </head>
+
 <body>
-    <br />
-    <section class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Products
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <!-- BEGIN PRODUCTS -->
-                            <div class="col-md-4 col-sm-6">
-                                <div class="sc-product-item thumbnail">
-                                    <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+1" alt="...">
-                                    <div class="caption">
-                                        <h4 data-name="product_name">Product 1</h4>
-                                        <p data-name="product_desc">Product details</p>
-                                        <hr class="line">
-                                        
-                                        <div>
-                                            <div class="form-group">
-                                                <label>Size: </label>
-                                                <select name="product_size" class="form-control input-sm">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Color: </label><br />
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="red"> red
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="blue"> blue
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="green"> green
-                                                </label>
-                                            </div>
-                                            <div class="form-group2">
-                                                <input class="sc-cart-item-qty" name="product_quantity" min="1" value="1" type="number">
-                                            </div>
-                                            <strong class="price pull-left">$2,990.50</strong>
-                                            
-                                            <input name="product_price" value="2990.50" type="hidden" />
-                                            <input name="product_id" value="12" type="hidden" />
-                                            <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Add to cart</button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <span class="sc-product-item thumbnail">
-                                    <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+2" alt="...">
-                                    <div class="caption">
-                                        <h4 data-name="product_name">Product 2 </h4>
-                                        <p data-name="product_desc">Product details</p>
-                                    
-                                        <hr class="line">
-                                        <div>
-                                            <div class="form-group">
-                                                <label>Size: </label>
-                                                <select name="product_size" class="form-control input-sm">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Color: </label><br />
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="red"> red
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="blue"> blue
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="green"> green
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="gift_wrap" value="1"> Gift wrap
-                                                </label>
-                                            </div>
-                                            <strong class="price pull-left">$5,435.50</strong>
-                                            
-                                            <input name="product_price" value="5435.50" type="hidden" />
-                                            <input name="product_id" value="145" type="hidden" />
-                                            <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Add to cart</button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </span>
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="sc-product-item thumbnail">
-                                    <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+3" alt="...">
-                                    <div class="caption">
-                                        <h4 data-name="product_name">Product 3</h4>
-                                        <p data-name="product_desc">Product details</p>
-                                    
-                                        <hr class="line">
-                                        
-                                        <div>
-                                            <div class="form-group">
-                                                <label>Size: </label>
-                                                <select name="product_size" class="form-control input-sm">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Color: </label><br />
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="red"> red
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="blue"> blue
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="green"> green
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="gift_wrap" value="1"> Gift wrap
-                                                </label>
-                                            </div>
-                                            <strong class="price pull-left">$5,435.50</strong>
-                                            
-                                            <input name="product_price" value="5435.50" type="hidden" />
-                                            <input name="product_id" value="145" type="hidden" />
-                                            <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Add to cart</button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-4 col-sm-6">
-                                <span class="sc-product-item thumbnail">
-                                    <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+4" alt="...">
-                                    <div class="caption">
-                                        <h4 data-name="product_name">Product 4 </h4>
-                                        <p data-name="product_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                    
-                                        <hr class="line">
-                                        <div>
-                                            <div class="form-group">
-                                                <label>Size: </label>
-                                                <select name="product_size" class="form-control input-sm">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Color: </label><br />
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="red"> red
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="blue"> blue
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="green"> green
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="gift_wrap" value="1"> Gift wrap
-                                                </label>
-                                            </div>
-                                            <strong class="price pull-left">$435.50</strong>
-                                            
-                                            <input name="product_price" value="435.50" type="hidden" />
-                                            <input name="product_id" value="154" type="hidden" />
-                                            <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Add to cart</button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </span>
-                            </div>
-                            
-                            <div class="col-md-4 col-sm-6">
-                                <span class="sc-product-item thumbnail">
-                                    <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+5" alt="...">
-                                    <div class="caption">
-                                        <h4 data-name="product_name">Product 5 </h4>
-                                        <p data-name="product_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                    
-                                        <hr class="line">
-                                        <div>
-                                            <div class="form-group">
-                                                <label>Size: </label>
-                                                <select name="product_size" class="form-control input-sm">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Color: </label><br />
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="red"> red
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="blue"> blue
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="green"> green
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="gift_wrap" value="1"> Gift wrap
-                                                </label>
-                                            </div>
-                                            <strong class="price pull-left">$3,410.00</strong>
-                                            
-                                            <input name="product_price" value="3410.00" type="hidden" />
-                                            <input name="product_id" value="155" type="hidden" />
-                                            <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Add to cart</button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </span>
-                            </div>
-                            
-                            <div class="col-md-4 col-sm-6">
-                                <span class="sc-product-item thumbnail">
-                                    <img data-name="product_image" src="http://placehold.it/250x150/2aabd2/ffffff?text=Product+6" alt="...">
-                                    <div class="caption">
-                                        <h4 data-name="product_name">Product 6 </h4>
-                                        <p data-name="product_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                    
-                                        <hr class="line">
-                                        <div>
-                                            <div class="form-group">
-                                                <label>Size: </label>
-                                                <select name="product_size" class="form-control input-sm">
-                                                    <option>S</option>
-                                                    <option>M</option>
-                                                    <option>L</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Color: </label><br />
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="red"> red
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="blue"> blue
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="product_color" value="green"> green
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="gift_wrap" value="1"> Gift wrap
-                                                </label>
-                                            </div>
-                                            <strong class="price pull-left">$5,435.50</strong>
-                                            
-                                            <input name="product_price" value="5435.50" type="hidden" />
-                                            <input name="product_id" value="145" type="hidden" />
-                                            <button class="sc-add-to-cart btn btn-success btn-sm pull-right">Add to cart</button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </span>
-                            </div>
-                            <!-- END PRODUCTS -->
+
+    <!-- Demo Header -->
+    <header class="demo-header">
+        <h1>jQuery SmartCart <span>v4.0</span></h1>
+        <div class="header-controls">
+            <button class="toggle-btn" id="toggle-dark" title="Toggle dark mode">🌙 Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Controls Bar -->
+    <div class="demo-controls">
+        <div class="control-group">
+            <label class="control-label" for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="default">Default</option>
+                <option value="modern">Modern</option>
+                <option value="minimal">Minimal</option>
+                <option value="dark">Dark</option>
+                <option value="glass">Glass</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="animation-select">Animation:</label>
+            <select id="animation-select">
+                <option value="highlight">Highlight</option>
+                <option value="bounce">Bounce</option>
+                <option value="slide">Slide</option>
+                <option value="none">None</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="duplicate-select">Add Duplicate:</label>
+            <select id="duplicate-select">
+                <option value="increase">Increase Qty</option>
+                <option value="disable">Disable Button</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <span class="control-label">Color:</span>
+            <div class="color-swatches">
+                <button class="swatch active" data-color="blue" title="Blue"></button>
+                <button class="swatch" data-color="teal" title="Teal"></button>
+                <button class="swatch" data-color="purple" title="Purple"></button>
+                <button class="swatch" data-color="rose" title="Rose"></button>
+                <button class="swatch" data-color="amber" title="Amber"></button>
+                <button class="swatch" data-color="slate" title="Slate"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <main class="demo-layout">
+
+        <!-- Products -->
+        <section>
+            <h2 class="products-heading">Products</h2>
+            <div class="products-grid">
+
+                <!-- Product 1 -->
+                <div class="sc-product-item">
+                    <img class="product-img" data-name="product_image" src="https://picsum.photos/seed/prod1/300/200"
+                        alt="Product 1">
+                    <div class="product-body">
+                        <h3 class="product-name" data-name="product_name">Wireless Headphones</h3>
+                        <p class="product-desc" data-name="product_desc">Premium noise-cancelling audio</p>
+                        <div class="product-meta">
+                            <select name="product_color">
+                                <option>Black</option>
+                                <option>White</option>
+                                <option>Red</option>
+                            </select>
+                        </div>
+                        <input name="product_price" value="89.99" type="hidden" />
+                        <input name="product_id" value="101" type="hidden" />
+                        <input name="product_quantity" value="1" type="hidden" />
+                        <div class="product-actions">
+                            <strong class="product-price">$89.99</strong>
+                            <button class="sc-add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- Product 2 -->
+                <div class="sc-product-item">
+                    <img class="product-img" data-name="product_image" src="https://picsum.photos/seed/prod2/300/200"
+                        alt="Product 2">
+                    <div class="product-body">
+                        <h3 class="product-name" data-name="product_name">Smart Watch</h3>
+                        <p class="product-desc" data-name="product_desc">Fitness & health tracker</p>
+                        <div class="product-meta">
+                            <select name="product_size">
+                                <option>40mm</option>
+                                <option>44mm</option>
+                            </select>
+                        </div>
+                        <input name="product_price" value="199.00" type="hidden" />
+                        <input name="product_id" value="102" type="hidden" />
+                        <input name="product_quantity" value="1" type="hidden" />
+                        <div class="product-actions">
+                            <strong class="product-price">$199.00</strong>
+                            <button class="sc-add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="sc-product-item">
+                    <img class="product-img" data-name="product_image" src="https://picsum.photos/seed/prod3/300/200"
+                        alt="Product 3">
+                    <div class="product-body">
+                        <h3 class="product-name" data-name="product_name">Mechanical Keyboard</h3>
+                        <p class="product-desc" data-name="product_desc">TKL layout, RGB backlight</p>
+                        <div class="product-meta">
+                            <select name="product_color">
+                                <option>Black</option>
+                                <option>White</option>
+                            </select>
+                        </div>
+                        <input name="product_price" value="129.50" type="hidden" />
+                        <input name="product_id" value="103" type="hidden" />
+                        <input name="product_quantity" value="1" type="hidden" />
+                        <div class="product-actions">
+                            <strong class="product-price">$129.50</strong>
+                            <button class="sc-add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="sc-product-item">
+                    <img class="product-img" data-name="product_image" src="https://picsum.photos/seed/prod4/300/200"
+                        alt="Product 4">
+                    <div class="product-body">
+                        <h3 class="product-name" data-name="product_name">USB-C Hub</h3>
+                        <p class="product-desc" data-name="product_desc">7-in-1 multiport adapter</p>
+                        <input name="product_price" value="49.99" type="hidden" />
+                        <input name="product_id" value="104" type="hidden" />
+                        <input name="product_quantity" value="1" type="hidden" />
+                        <div class="product-actions">
+                            <strong class="product-price">$49.99</strong>
+                            <button class="sc-add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="sc-product-item">
+                    <img class="product-img" data-name="product_image" src="https://picsum.photos/seed/prod5/300/200"
+                        alt="Product 5">
+                    <div class="product-body">
+                        <h3 class="product-name" data-name="product_name">Webcam HD</h3>
+                        <p class="product-desc" data-name="product_desc">1080p, built-in microphone</p>
+                        <input name="product_price" value="74.95" type="hidden" />
+                        <input name="product_id" value="105" type="hidden" />
+                        <input name="product_quantity" value="1" type="hidden" />
+                        <div class="product-actions">
+                            <strong class="product-price">$74.95</strong>
+                            <button class="sc-add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="sc-product-item">
+                    <img class="product-img" data-name="product_image" src="https://picsum.photos/seed/prod6/300/200"
+                        alt="Product 6">
+                    <div class="product-body">
+                        <h3 class="product-name" data-name="product_name">Desk Lamp LED</h3>
+                        <p class="product-desc" data-name="product_desc">Adjustable brightness & color</p>
+                        <div class="product-meta">
+                            <select name="product_color">
+                                <option>White</option>
+                                <option>Black</option>
+                                <option>Silver</option>
+                            </select>
+                        </div>
+                        <input name="product_price" value="39.00" type="hidden" />
+                        <input name="product_id" value="106" type="hidden" />
+                        <input name="product_quantity" value="1" type="hidden" />
+                        <div class="product-actions">
+                            <strong class="product-price">$39.00</strong>
+                            <button class="sc-add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            
-            <aside class="col-md-4">
-                
-                <!-- Cart submit form -->
-                <form action="results.php" method="POST"> 
-                    <!-- SmartCart element -->
-                    <div id="smartcart"></div>
-                </form>
-                
-            </aside>
-        </div>
-    </section>
-    
-    <!-- Include jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript" ></script>
-    <!-- Include SmartCart -->
-    <script src="../dist/js/jquery.smartCart.min.js" type="text/javascript"></script>
-    <!-- Initialize -->
+        </section>
+
+        <!-- Cart Sidebar -->
+        <aside>
+            <form action="results.php" method="POST">
+                <div id="smartcart"></div>
+            </form>
+        </aside>
+
+    </main>
+
+    <!-- jQuery 4 -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+        integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+
+    <!-- SmartCart -->
+    <script src="../dist/js/jquery.smartCart.js" type="text/javascript"></script>
+
     <script type="text/javascript">
-        $(document).ready(function(){
-            // Initialize Smart Cart    	
-            $('#smartcart').smartCart();
-		});
+        $(function () {
+            let currentTheme = 'default';
+            let currentColor = 'blue';
+            let isDark = false;
+            let animationEffect = 'highlight';
+
+            // Initialize SmartCart
+            const $cart = $('#smartcart').smartCart({
+                theme: currentTheme,
+                displayMode: 'auto',
+                animationEffect: animationEffect,
+                quantityStepper: true,
+                addOnDuplicate: 'increase',
+                persistence: 'localStorage',
+                debug: false,
+                toolbarSettings: {
+                    showToolbar: true,
+                    showCheckoutButton: true,
+                    showClearButton: true,
+                    showCartSummary: true,
+                    checkoutButtonStyle: 'default',
+                    checkoutButtonImage: '',
+                    toolbarExtraButtons: [],
+                },
+                lang: {
+                    cartTitle: 'My Cart',
+                    checkout: 'Checkout →',
+                    clear: 'Clear',
+                    subtotal: 'Subtotal:',
+                    cartRemove: '×',
+                    cartEmpty: 'Your cart is empty.<br>Add some products!',
+                    quantityDecrease: '−',
+                    quantityIncrease: '+',
+                },
+            });
+
+            // Apply initial color
+            $cart.addClass('sc-color-' + currentColor);
+
+            // ---- Theme switcher ----
+            $('#theme-select').on('change', function () {
+                currentTheme = $(this).val();
+                $cart.smartCart('setTheme', currentTheme);
+            });
+
+            // ---- Animation switcher ----
+            $('#animation-select').on('change', function () {
+                animationEffect = $(this).val();
+                $cart.data('smartCart') && ($cart.data('smartCart').options.animationEffect = animationEffect);
+            });
+
+            // ---- Add-on-duplicate switcher ----
+            $('#duplicate-select').on('change', function () {
+                const mode = $(this).val();
+                $cart.data('smartCart') && ($cart.data('smartCart').options.addOnDuplicate = mode);
+            });
+
+            // ---- Color presets ----
+            $('.swatch').on('click', function () {
+                const color = $(this).data('color');
+                if (color === currentColor) return;
+
+                $cart.removeClass('sc-color-' + currentColor).addClass('sc-color-' + color);
+                currentColor = color;
+                $('.swatch').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            // ---- Dark mode toggle ----
+            $('#toggle-dark').on('click', function () {
+                isDark = !isDark;
+                $('body').attr('data-ui-theme', isDark ? 'dark' : '');
+                $(this).text(isDark ? '☀️ Light Mode' : '🌙 Dark Mode');
+                $cart.smartCart('setDisplayMode', isDark ? 'dark' : 'light');
+            });
+
+            // Cart events
+            $('#smartcart').on('itemAdded', function (e, item) {
+                console.log('[SmartCart] Item added:', item);
+            });
+
+            $('#smartcart').on('cartEmpty', function () {
+                console.log('[SmartCart] Cart is empty');
+            });
+        });
     </script>
 </body>
+
 </html>

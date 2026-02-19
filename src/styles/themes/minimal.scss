@@ -1,0 +1,92 @@
+/*! jQuery SmartCart v4 — Minimal Theme */
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+// Minimal theme: no backgrounds, only lines and typography
+.sc-theme-minimal {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+
+    .sc-cart-heading {
+        background: transparent;
+        border-bottom: 2px solid var(--sc-primary);
+        padding: $sc-spacing-sm 0;
+        font-size: $sc-font-size-lg;
+        font-weight: $sc-font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 0.8125rem;
+        color: var(--sc-text);
+
+        .sc-cart-count {
+            font-size: 0.6875rem;
+        }
+    }
+
+    .sc-cart-item-list {
+        @include sc-scrollable-list(400px);
+    }
+
+    .sc-cart-item {
+        padding: $sc-spacing 0;
+        background: transparent;
+        border-bottom: 1px solid var(--sc-border);
+
+        &:hover {
+            background: transparent;
+        }
+
+        .sc-cart-remove {
+            top: $sc-spacing;
+            right: 0;
+        }
+    }
+
+    .sc-toolbar {
+        background: transparent;
+        border-top: 1px solid var(--sc-border);
+        padding: $sc-spacing 0;
+    }
+
+    .sc-btn {
+        border-radius: 0;
+        background: transparent;
+        border-color: var(--sc-text);
+        color: var(--sc-text);
+
+        &.sc-btn-checkout {
+            background: var(--sc-text);
+            color: var(--sc-bg);
+
+            &:hover:not(.disabled) {
+                background: var(--sc-primary);
+                border-color: var(--sc-primary);
+                color: var(--sc-primary-text, #fff);
+            }
+        }
+
+        &.sc-btn-clear {
+            border-color: var(--sc-border);
+
+            &:hover:not(.disabled) {
+                border-color: var(--sc-danger);
+                background: transparent;
+                color: var(--sc-danger);
+            }
+        }
+    }
+
+    .sc-qty-btn {
+        border-radius: 0;
+        background: transparent;
+        border-color: var(--sc-border);
+
+        &:hover {
+            background: var(--sc-primary);
+            border-color: var(--sc-primary);
+        }
+    }
+}

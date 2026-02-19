@@ -1,0 +1,110 @@
+// ============================================================================
+// Cart Toolbar Component
+// ============================================================================
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.sc-cart {
+    .sc-toolbar {
+        @include sc-flex(row, center, space-between, wrap);
+        gap: $sc-spacing-sm;
+        padding: $sc-spacing-sm $sc-spacing;
+        background-color: var(--sc-toolbar-bg);
+        border-top: 1px solid var(--sc-toolbar-border);
+    }
+
+    // Summary (subtotal)
+    .sc-cart-summary {
+        font-size: $sc-font-size-sm;
+        color: var(--sc-text-secondary);
+    }
+
+    .sc-cart-summary-subtotal {
+        @include sc-flex(row, center, flex-start);
+        gap: $sc-spacing-xs;
+    }
+
+    .sc-cart-subtotal {
+        font-size: $sc-font-size-lg;
+        font-weight: $sc-font-weight-bold;
+        color: var(--sc-text);
+    }
+
+    // Toolbar button group
+    .sc-cart-toolbar {
+        @include sc-flex(row, center, flex-end);
+        gap: $sc-spacing-xs;
+    }
+
+    // Base button style
+    .sc-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: $sc-spacing-xs;
+        padding: $sc-spacing-xs (
+            $sc-spacing + $sc-spacing-xs
+        );
+    font-size: $sc-font-size-sm;
+    font-weight: $sc-font-weight-medium;
+    font-family: inherit;
+    line-height: 1.5;
+    border: 1px solid transparent;
+    border-radius: $sc-border-radius-sm;
+    cursor: pointer;
+    white-space: nowrap;
+    @include sc-transition(background-color, border-color, opacity);
+    text-decoration: none;
+
+    &.disabled,
+    &:disabled {
+        opacity: 0.45;
+        pointer-events: none;
+    }
+}
+
+// Checkout button
+.sc-btn-checkout {
+    background-color: var(--sc-primary);
+    border-color: var(--sc-primary);
+    color: var(--sc-primary-text);
+
+    &:hover:not(.disabled) {
+        background-color: var(--sc-primary-hover);
+        border-color: var(--sc-primary-hover);
+    }
+}
+
+// Clear button
+.sc-btn-clear {
+    background-color: transparent;
+    border-color: var(--sc-border);
+    color: var(--sc-text-secondary);
+
+    &:hover:not(.disabled) {
+        background-color: var(--sc-danger);
+        border-color: var(--sc-danger);
+        color: #fff;
+    }
+}
+
+// PayPal button (image)
+.sc-btn-checkout-paypal,
+.sc-btn-checkout-image {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+
+    img {
+        height: 32px;
+        width: auto;
+    }
+
+    &.disabled {
+        opacity: 0.45;
+        pointer-events: none;
+    }
+}
+}

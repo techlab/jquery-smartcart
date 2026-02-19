@@ -1,0 +1,40 @@
+/*! * jQuery SmartCart v4
+ * The smart interactive jQuery Shopping Cart plugin
+ * http://www.techlaboratory.net/jquery-smartcart
+ *
+ * Created by Dipu Raj
+ * https://dipu.me
+ *
+ * Licensed under the terms of the MIT License
+ * https://github.com/techlab/jquery-smartcart/blob/master/LICENSE
+ */
+
+@charset "UTF-8";
+
+// 1. Configuration
+@use 'base/variables';
+@use 'base/mixins';
+
+// 2. Root CSS Custom Properties
+@use 'base/root';
+
+// 3. Base styles
+@use 'base/reset';
+
+// 4. Components
+@use 'components/cart';
+@use 'components/item';
+@use 'components/toolbar';
+
+// 5. Theme base
+@use 'themes/theme-base';
+
+// 6. Themes
+@use 'themes/default';
+@use 'themes/modern';
+@use 'themes/minimal';
+@use 'themes/dark';
+@use 'themes/glass';
+
+// 7. Color presets
+@use 'base/presets';

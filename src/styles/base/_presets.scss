@@ -1,0 +1,50 @@
+// ============================================================================
+// SmartCart Color Presets
+// Color presets override CSS custom properties for accent/primary colors
+// Usage: add class .sc-color-{name} to the cart element
+// ============================================================================
+
+// Blue (default)
+.sc-color-blue {
+    --sc-primary: #3b82f6;
+    --sc-primary-hover: #2563eb;
+    --sc-success: #22c55e;
+    --sc-badge-bg: #3b82f6;
+}
+
+// Teal
+.sc-color-teal {
+    --sc-primary: #14b8a6;
+    --sc-primary-hover: #0d9488;
+    --sc-badge-bg: #14b8a6;
+}
+
+// Purple
+.sc-color-purple {
+    --sc-primary: #8b5cf6;
+    --sc-primary-hover: #7c3aed;
+    --sc-badge-bg: #8b5cf6;
+}
+
+// Rose
+.sc-color-rose {
+    --sc-primary: #f43f5e;
+    --sc-primary-hover: #e11d48;
+    --sc-badge-bg: #f43f5e;
+}
+
+// Amber
+.sc-color-amber {
+    --sc-primary: #f59e0b;
+    --sc-primary-hover: #d97706;
+    --sc-primary-text: #1e293b;
+    --sc-badge-bg: #f59e0b;
+    --sc-badge-text: #1e293b;
+}
+
+// Slate
+.sc-color-slate {
+    --sc-primary: #475569;
+    --sc-primary-hover: #334155;
+    --sc-badge-bg: #475569;
+}

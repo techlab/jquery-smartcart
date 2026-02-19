@@ -1,0 +1,75 @@
+/*! jQuery SmartCart v4 — Modern Theme */
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+@use 'theme-base' as *;
+
+// Modern theme: card-based, large rounded corners, drop shadows, smooth transitions
+.sc-theme-modern {
+    @include sc-theme-base;
+    border-radius: 1rem;
+    box-shadow: var(--sc-shadow-lg);
+    border: none;
+
+    .sc-cart-heading {
+        background: linear-gradient(135deg, var(--sc-primary), var(--sc-primary-hover, var(--sc-primary)));
+        color: var(--sc-primary-text, #fff);
+        border-bottom: none;
+        padding: $sc-spacing $sc-spacing-lg;
+        font-size: $sc-font-size-lg;
+
+        .sc-cart-count {
+            background-color: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+    }
+
+    .sc-cart-item-list {
+        @include sc-scrollable-list(420px);
+    }
+
+    .sc-cart-item {
+        padding: $sc-spacing $sc-spacing-lg;
+        border-bottom: 1px solid var(--sc-item-border);
+        @include sc-transition(background-color, transform);
+
+        &:hover {
+            transform: translateX(3px);
+        }
+
+        .sc-cart-remove {
+            top: $sc-spacing;
+            right: $sc-spacing;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+
+            &:hover {
+                background-color: var(--sc-danger);
+                color: #fff;
+            }
+        }
+    }
+
+    .sc-toolbar {
+        background: var(--sc-bg-secondary);
+        border-top: 1px solid var(--sc-border);
+        padding: $sc-spacing $sc-spacing-lg;
+    }
+
+    .sc-btn {
+        border-radius: $sc-border-radius-pill;
+        padding: $sc-spacing-xs (
+            $sc-spacing + $sc-spacing-sm
+        );
+    font-size: $sc-font-size-sm;
+    font-weight: $sc-font-weight-bold;
+    letter-spacing: 0.02em;
+}
+
+.sc-qty-btn {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+}

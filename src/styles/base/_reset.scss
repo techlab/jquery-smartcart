@@ -1,0 +1,35 @@
+// ============================================================================
+// SmartCart Base Reset
+// ============================================================================
+
+@use 'variables' as *;
+
+.sc-cart {
+    box-sizing: border-box;
+    font-family: $sc-font-family;
+    font-size: $sc-font-size;
+    line-height: $sc-line-height;
+    color: var(--sc-text);
+    background-color: var(--sc-bg);
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: inherit;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    button {
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    input {
+        font-family: inherit;
+    }
+}

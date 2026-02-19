@@ -1,0 +1,157 @@
+// ============================================================================
+// Cart Item Component
+// ============================================================================
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.sc-cart {
+    .sc-cart-item {
+        position: relative;
+        padding: $sc-spacing;
+        background-color: var(--sc-item-bg);
+        border-bottom: 1px solid var(--sc-item-border);
+        @include sc-transition(background-color);
+
+        &:hover {
+            background-color: var(--sc-item-hover-bg);
+        }
+
+        // Product image
+        .sc-item-img {
+            float: left;
+            width: $sc-item-img-size;
+            height: $sc-item-img-size;
+            object-fit: cover;
+            border-radius: $sc-border-radius-sm;
+            margin-right: $sc-spacing;
+        }
+
+        // Product heading / name
+        .sc-item-heading {
+            margin: 0 0 $sc-spacing-xs;
+            font-size: $sc-font-size;
+            font-weight: $sc-font-weight-medium;
+            color: var(--sc-text);
+            padding-right: 1.5rem; // space for remove button
+        }
+
+        // Product description
+        .sc-item-desc {
+            margin: 0;
+            font-size: $sc-font-size-sm;
+            color: var(--sc-text-secondary);
+        }
+
+        // Remove button
+        .sc-cart-remove {
+            position: absolute;
+            top: $sc-spacing-sm;
+            right: $sc-spacing-sm;
+            background: transparent;
+            border: none;
+            padding: 2px 6px;
+            font-size: 1.1rem;
+            line-height: 1;
+            color: var(--sc-text-muted);
+            border-radius: $sc-border-radius-sm;
+            @include sc-transition(color, background-color);
+
+            &:hover {
+                color: var(--sc-danger);
+                background-color: rgba(239, 68, 68, 0.1);
+            }
+        }
+
+        // Item price/quantity row
+        .sc-cart-item-summary {
+            @include sc-flex(row, center, flex-end);
+            gap: $sc-spacing-xs;
+            margin-top: $sc-spacing-sm;
+            padding-top: $sc-spacing-sm;
+            border-top: 1px solid var(--sc-border);
+            font-size: $sc-font-size-sm;
+            color: var(--sc-text-secondary);
+            clear: both;
+        }
+
+        // Price label
+        .sc-cart-item-price {
+            font-weight: $sc-font-weight-medium;
+            color: var(--sc-text);
+        }
+
+        // Amount = price × qty
+        .sc-cart-item-amount {
+            font-weight: $sc-font-weight-bold;
+            color: var(--sc-text);
+        }
+
+        // Quantity controls wrapper
+        .sc-cart-item-qty-wrap {
+            @include sc-flex(row, center, center);
+            gap: 0;
+        }
+
+        // Raw quantity input (fallback or standalone)
+        .sc-cart-item-qty {
+            width: $sc-qty-input-width;
+            padding: 3px 4px;
+            text-align: center;
+            font-size: $sc-font-size-sm;
+            border: 1px solid var(--sc-border);
+            border-radius: 0;
+            background: var(--sc-bg);
+            color: var(--sc-text);
+            @include sc-transition(border-color);
+
+            &:focus {
+                outline: none;
+                border-color: var(--sc-primary);
+            }
+
+            // Hide number spinners
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                appearance: none;
+            }
+
+            -moz-appearance: textfield;
+        }
+
+        // Stepper +/- buttons
+        .sc-qty-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 100%;
+            padding: 3px 0;
+            font-size: 1rem;
+            font-weight: $sc-font-weight-bold;
+            line-height: 1;
+            border: 1px solid var(--sc-border);
+            background: var(--sc-bg-secondary);
+            color: var(--sc-text-secondary);
+            @include sc-transition(background-color, color);
+
+            &:hover {
+                background-color: var(--sc-primary);
+                border-color: var(--sc-primary);
+                color: var(--sc-primary-text);
+            }
+
+            &.sc-qty-decrease {
+                border-radius: $sc-border-radius-sm 0 0 $sc-border-radius-sm;
+            }
+
+            &.sc-qty-increase {
+                border-radius: 0 $sc-border-radius-sm $sc-border-radius-sm 0;
+            }
+        }
+
+        // Animation effects
+        @include sc-highlight-animation(#fef3c7);
+        @include sc-bounce-animation;
+    }
+}

@@ -1,0 +1,34 @@
+/*! jQuery SmartCart v4 — Default Theme */
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+@use 'theme-base' as *;
+
+// Default theme: clean card with subtle border, classic Bootstrap-inspired layout
+.sc-theme-default {
+    @include sc-theme-base;
+
+    .sc-cart-heading {
+        font-size: 1rem;
+        font-weight: $sc-font-weight-bold;
+        background-color: var(--sc-heading-bg);
+        border-bottom: 2px solid var(--sc-primary);
+        padding: $sc-spacing-sm $sc-spacing;
+    }
+
+    .sc-cart-item-list {
+        @include sc-scrollable-list(400px);
+    }
+
+    .sc-cart-item {
+        padding: $sc-spacing $sc-spacing;
+    }
+
+    .sc-toolbar {
+        border-top: 1px solid var(--sc-toolbar-border);
+    }
+
+    .sc-btn-checkout {
+        border-radius: $sc-border-radius-sm;
+    }
+}

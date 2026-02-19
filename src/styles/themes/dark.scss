@@ -1,0 +1,73 @@
+/*! jQuery SmartCart v4 — Dark Theme */
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+@use 'theme-base' as *;
+
+// Dark theme: forces dark regardless of prefers-color-scheme or displayMode
+// This overrides the CSS custom properties directly on the theme class
+.sc-theme-dark {
+    @include sc-theme-base;
+
+    // Force dark palette on this element regardless of system setting
+    --sc-bg: #1e293b;
+    --sc-bg-secondary: #0f172a;
+    --sc-bg-hover: #334155;
+    --sc-border: #334155;
+    --sc-border-focus: #60a5fa;
+    --sc-text: #f1f5f9;
+    --sc-text-secondary: #94a3b8;
+    --sc-text-muted: #64748b;
+    --sc-heading-bg: #0f172a;
+    --sc-heading-border: #334155;
+    --sc-toolbar-bg: #0f172a;
+    --sc-toolbar-border: #334155;
+    --sc-item-bg: #1e293b;
+    --sc-item-border: #334155;
+    --sc-item-hover-bg: #334155;
+    --sc-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --sc-shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.6);
+
+    background-color: var(--sc-bg);
+    color: var(--sc-text);
+
+    .sc-cart-heading {
+        background-color: var(--sc-heading-bg);
+        border-bottom: 1px solid var(--sc-primary);
+    }
+
+    .sc-cart-item-list {
+        @include sc-scrollable-list(380px);
+    }
+
+    .sc-cart-item {
+        background-color: var(--sc-item-bg);
+        border-bottom-color: var(--sc-item-border);
+
+        &:hover {
+            background-color: var(--sc-item-hover-bg);
+        }
+    }
+
+    .sc-toolbar {
+        background-color: var(--sc-toolbar-bg);
+        border-top-color: var(--sc-toolbar-border);
+    }
+
+    // Highlight animation in dark mode
+    .sc-cart-item.sc-anim-highlight {
+        animation: sc-dark-highlight 0.6s ease-in-out;
+    }
+
+    @keyframes sc-dark-highlight {
+
+        0%,
+        100% {
+            background-color: var(--sc-item-bg);
+        }
+
+        30% {
+            background-color: #1e3a5f;
+        }
+    }
+}

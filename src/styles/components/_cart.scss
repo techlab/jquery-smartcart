@@ -1,0 +1,72 @@
+// ============================================================================
+// Cart Component — Core Container Styles
+// ============================================================================
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.sc-cart {
+    position: relative;
+    width: 100%;
+
+    // Cart header
+    .sc-cart-heading {
+        @include sc-flex(row, center, space-between);
+        padding: $sc-spacing-sm $sc-spacing;
+        font-size: $sc-font-size-lg;
+        font-weight: $sc-font-weight-bold;
+        background-color: var(--sc-heading-bg);
+        border-bottom: 1px solid var(--sc-heading-border);
+        color: var(--sc-text);
+    }
+
+    // Item count badge
+    .sc-cart-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        font-size: 11px;
+        font-weight: $sc-font-weight-bold;
+        border-radius: $sc-border-radius-pill;
+        background-color: var(--sc-badge-bg, var(--sc-primary));
+        color: var(--sc-badge-text, #fff);
+        line-height: 1;
+    }
+
+    // Cart item list
+    .sc-cart-item-list {
+        min-height: 60px;
+    }
+
+    // Empty state message
+    .sc-cart-empty-msg {
+        padding: $sc-spacing-lg $sc-spacing;
+        text-align: center;
+        color: var(--sc-text-muted);
+        font-size: $sc-font-size-sm;
+        line-height: 1.8;
+    }
+
+    // Loading state
+    &.sc-loading {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+}
+
+// Product item — container on the page (not the cart)
+.sc-product-item {
+    position: relative;
+    @include sc-transition(border-color);
+
+    &::after,
+    &::before {
+        @include sc-transition(all);
+    }
+}
+
+// Added badge on product card
+@include sc-added-badge(var(--sc-success, #22c55e));

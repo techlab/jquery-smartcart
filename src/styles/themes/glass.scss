@@ -1,0 +1,129 @@
+/*! jQuery SmartCart v4 — Glass Theme */
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+// Glass theme: frosted glassmorphism effect
+.sc-theme-glass {
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    overflow: hidden;
+    color: var(--sc-text);
+
+    .sc-cart-heading {
+        background: rgba(255, 255, 255, 0.12);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding: $sc-spacing $sc-spacing-lg;
+        font-weight: $sc-font-weight-bold;
+        backdrop-filter: blur(8px);
+    }
+
+    .sc-cart-item-list {
+        @include sc-scrollable-list(400px);
+    }
+
+    .sc-cart-item {
+        background: rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        padding: $sc-spacing $sc-spacing-lg;
+        @include sc-transition(background-color);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .sc-cart-remove {
+            &:hover {
+                background-color: rgba(239, 68, 68, 0.2);
+                color: #f87171;
+            }
+        }
+
+        .sc-cart-item-summary {
+            border-top-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .sc-cart-item-qty {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--sc-text);
+        }
+
+        .sc-qty-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--sc-text);
+
+            &:hover {
+                background: var(--sc-primary);
+                border-color: var(--sc-primary);
+            }
+        }
+    }
+
+    .sc-toolbar {
+        background: rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding: $sc-spacing $sc-spacing-lg;
+        backdrop-filter: blur(8px);
+    }
+
+    .sc-btn {
+        border-radius: $sc-border-radius-pill;
+
+        &.sc-btn-checkout {
+            background: var(--sc-primary);
+            border-color: var(--sc-primary);
+
+            &:hover:not(.disabled) {
+                background: var(--sc-primary-hover);
+                border-color: var(--sc-primary-hover);
+            }
+        }
+
+        &.sc-btn-clear {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+
+            &:hover:not(.disabled) {
+                background: rgba(239, 68, 68, 0.3);
+                border-color: #f87171;
+                color: #f87171;
+            }
+        }
+    }
+
+    .sc-cart-empty-msg {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    // Dark mode glass variant
+    [data-theme='dark'] & {
+        background: rgba(15, 23, 42, 0.55);
+        border-color: rgba(100, 116, 139, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+        .sc-cart-heading {
+            background: rgba(15, 23, 42, 0.4);
+            border-bottom-color: rgba(100, 116, 139, 0.3);
+        }
+
+        .sc-cart-item {
+            background: rgba(30, 41, 59, 0.4);
+            border-bottom-color: rgba(51, 65, 85, 0.5);
+
+            &:hover {
+                background: rgba(51, 65, 85, 0.5);
+            }
+        }
+
+        .sc-toolbar {
+            background: rgba(15, 23, 42, 0.4);
+            border-top-color: rgba(51, 65, 85, 0.4);
+        }
+    }
+}

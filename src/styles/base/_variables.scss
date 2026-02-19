@@ -1,0 +1,42 @@
+// ============================================================================
+// SmartCart SCSS Variables
+// ============================================================================
+
+// Layout
+$sc-border-radius: 0.5rem !default;
+$sc-border-radius-sm: 0.25rem !default;
+$sc-border-radius-pill: 999px !default;
+
+// Spacing
+$sc-spacing-xs: 0.25rem !default;
+$sc-spacing-sm: 0.5rem !default;
+$sc-spacing: 1rem !default;
+$sc-spacing-lg: 1.5rem !default;
+
+// Typography
+$sc-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif !default;
+$sc-font-size: 0.9375rem !default;
+$sc-font-size-sm: 0.8125rem !default;
+$sc-font-size-lg: 1.125rem !default;
+$sc-font-weight-normal: 400 !default;
+$sc-font-weight-medium: 500 !default;
+$sc-font-weight-bold: 600 !default;
+$sc-line-height: 1.5 !default;
+
+// Transitions
+$sc-transition-speed: 200ms !default;
+$sc-transition-easing: ease-in-out !default;
+
+// Shadows
+$sc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08) !default;
+$sc-shadow: 0 2px 8px rgba(0, 0, 0, 0.10) !default;
+$sc-shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.14) !default;
+
+// Product badge
+$sc-badge-size: 44px !default;
+
+// Thumbnail size in cart 
+$sc-item-img-size: 64px !default;
+
+// Quantity input width
+$sc-qty-input-width: 52px !default;

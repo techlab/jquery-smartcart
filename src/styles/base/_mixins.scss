@@ -1,0 +1,136 @@
+// ============================================================================
+// SmartCart SCSS Mixins
+// ============================================================================
+
+@use 'variables' as *;
+
+// Apply theme styles within a theme selector
+@mixin sc-theme($name) {
+    .sc-theme-#{$name} {
+        @content;
+    }
+}
+
+// Flex layout helper
+@mixin sc-flex($direction: row, $align: center, $justify: flex-start, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+    flex-wrap: $wrap;
+}
+
+// Transition shorthand (supports multiple properties)
+@mixin sc-transition($properties...) {
+    $result: (
+    );
+
+@if length($properties)==0 {
+    $result: all $sc-transition-speed $sc-transition-easing;
+}
+
+@else {
+    @each $prop in $properties {
+        $result: append($result, #{$prop} $sc-transition-speed $sc-transition-easing, comma);
+    }
+}
+
+transition: $result;
+}
+
+// Highlight animation keyframes + class
+@mixin sc-highlight-animation($color: #fef3c7) {
+    @keyframes sc-highlight-flash {
+
+        0%,
+        100% {
+            background-color: transparent;
+        }
+
+        30% {
+            background-color: $color;
+        }
+    }
+
+    &.sc-anim-highlight {
+        animation: sc-highlight-flash 0.6s ease-in-out;
+    }
+}
+
+// Bounce animation
+@mixin sc-bounce-animation {
+    @keyframes sc-bounce-pop {
+        0% {
+            transform: scale(1);
+        }
+
+        40% {
+            transform: scale(1.05);
+        }
+
+        80% {
+            transform: scale(0.97);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    &.sc-anim-bounce {
+        animation: sc-bounce-pop 0.5s ease-in-out;
+    }
+}
+
+// Added item corner badge
+@mixin sc-added-badge($color: #22c55e) {
+    .sc-added-item {
+        border-color: $color;
+
+        &::after {
+            content: '✓';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            right: 4px;
+            z-index: 99;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        &::before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 98;
+            border-style: solid;
+            border-width: 0 $sc-badge-size $sc-badge-size 0;
+            border-color: transparent $color transparent transparent;
+        }
+    }
+}
+
+// Scrollable cart list
+@mixin sc-scrollable-list($max-height: 420px) {
+    max-height: $max-height;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+
+    // Scrollbar styling
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 99px;
+        background: rgba(0, 0, 0, 0.15);
+    }
+}

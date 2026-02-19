@@ -1,0 +1,75 @@
+// ============================================================================
+// SmartCart CSS Custom Properties (Design Tokens)
+// ============================================================================
+
+:root {
+    // Colors — light mode defaults
+    --sc-primary: #3b82f6;
+    --sc-primary-hover: #2563eb;
+    --sc-primary-text: #ffffff;
+    --sc-danger: #ef4444;
+    --sc-danger-hover: #dc2626;
+    --sc-success: #22c55e;
+    --sc-success-hover: #16a34a;
+
+    // Backgrounds
+    --sc-bg: #ffffff;
+    --sc-bg-secondary: #f8fafc;
+    --sc-bg-hover: #f1f5f9;
+
+    // Borders
+    --sc-border: #e2e8f0;
+    --sc-border-focus: #93c5fd;
+
+    // Text
+    --sc-text: #1e293b;
+    --sc-text-secondary: #64748b;
+    --sc-text-muted: #94a3b8;
+    --sc-text-on-primary: #ffffff;
+
+    // Heading & badge
+    --sc-heading-bg: #f8fafc;
+    --sc-heading-border: #e2e8f0;
+    --sc-badge-bg: var(--sc-primary);
+    --sc-badge-text: var(--sc-primary-text);
+
+    // Toolbar
+    --sc-toolbar-bg: #f8fafc;
+    --sc-toolbar-border: #e2e8f0;
+
+    // Cart item
+    --sc-item-bg: #ffffff;
+    --sc-item-border: #e2e8f0;
+    --sc-item-hover-bg: #f8fafc;
+
+    // Shadows
+    --sc-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --sc-shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+// Dark mode — applied via [data-theme="dark"] on the cart element
+[data-theme='dark'] {
+    --sc-bg: #1e293b;
+    --sc-bg-secondary: #0f172a;
+    --sc-bg-hover: #334155;
+
+    --sc-border: #334155;
+    --sc-border-focus: #60a5fa;
+
+    --sc-text: #f1f5f9;
+    --sc-text-secondary: #94a3b8;
+    --sc-text-muted: #64748b;
+
+    --sc-heading-bg: #0f172a;
+    --sc-heading-border: #334155;
+
+    --sc-toolbar-bg: #0f172a;
+    --sc-toolbar-border: #334155;
+
+    --sc-item-bg: #1e293b;
+    --sc-item-border: #334155;
+    --sc-item-hover-bg: #334155;
+
+    --sc-shadow: 0 2px 8px rgba(0, 0, 0, 0.40);
+    --sc-shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.50);
+}
